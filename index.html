@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EduQuest · CBSE Maths POC</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8F9FF;--sf:#fff;--tx:#1A1A2E;--mu:#5b5f7a;--ac:#E94560;--bl:#0F3460;--ok:#2ECC71;--wn:#F39C12;--bd:#e1e4f2;--hl:#eef1ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12121f;--sf:#1d1d33;--tx:#f1f2fa;--mu:#a3a7c4;--bd:#2f3052;--bl:#7aa7ff;--hl:#26274a}}
+:root[data-theme="dark"]{--bg:#12121f;--sf:#1d1d33;--tx:#f1f2fa;--mu:#a3a7c4;--bd:#2f3052;--bl:#7aa7ff;--hl:#26274a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Nunito,system-ui,sans-serif}
+.w{max-width:520px;margin:0 auto;padding:12px 14px 40px}
+header{display:flex;justify-content:space-between;align-items:center;gap:8px}
+h1{font-size:20px;margin:0;font-weight:800}h1 span{color:var(--ac)}h2{margin:18px 0 4px;font-size:20px}
+.tag{font-size:11px;background:var(--hl);color:var(--bl);padding:2px 8px;border-radius:99px;font-weight:800}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:800;background:var(--ac);color:#fff;min-height:48px}
+button.g{background:var(--hl);color:var(--bl)}button.s{min-height:36px;padding:6px 12px;font-size:13px}
+.card{display:block;width:100%;text-align:left;background:var(--sf);color:var(--tx);border:2px solid var(--bd);margin:10px 0;padding:14px}
+.card small{display:block;color:var(--mu);font-weight:600}
+#bar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;font-size:13px;font-weight:800}
+#bar span{background:var(--sf);border:1px solid var(--bd);border-radius:99px;padding:3px 10px}
+.mu{color:var(--mu);font-size:14px}.q{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:16px;margin:10px 0}
+.q h3{margin:6px 0 0;font-size:21px;line-height:1.3}
+.o{display:block;width:100%;text-align:left;background:var(--sf);color:var(--tx);border:2px solid var(--bd);margin:8px 0}
+.o.ok{border-color:var(--ok);background:rgba(46,204,113,.18)}.o.no{border-color:var(--ac);background:rgba(233,69,96,.15)}
+.fb{background:var(--hl);border-radius:12px;padding:12px;margin:10px 0;font-size:15px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.row button{flex:1}
+details{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;margin-top:18px;font-size:14px}
+summary{font-weight:800;cursor:pointer}td{padding:2px 12px 2px 0}
+.hit{color:var(--ok);font-weight:800}.miss{color:var(--wn);font-weight:800}
+</style></head><body><div class="w">
+<header><h1>Edu<span>Quest</span> <span class="tag">POC</span></h1><button class="g s" onclick="reset()">👤 New student</button></header>
+<div id="bar"></div><main id="m"></main>
+<details><summary>🔍 Behind the scenes (live)</summary><div id="bts"></div></details>
+<p class="mu">Demo with sample questions. Purchases and the AI explanation are simulated. Real app: every question is human-approved &amp; copyright-checked before students see it.</p>
+</div><script>
+const Q={8:[
+["Linear Equations",1,"Solve: 3x + 7 = 22",["x = 3","x = 4","x = 5","x = 6"],2,"Isolate the x-term first.","Subtract 7 from both sides: 3x = 15. Divide by 3: x = 5.","Dividing 22 by 3 before subtracting 7."],
+["Linear Equations",2,"Solve: 2(x − 3) = x + 4",["x = 7","x = 8","x = 10","x = 12"],2,"Expand the bracket, then collect x terms.","2x − 6 = x + 4 → 2x − x = 4 + 6 → x = 10.","Forgetting to multiply −3 by 2."],
+["Linear Equations",3,"The sum of two consecutive numbers is 95. What is the larger number?",["46","47","48","49"],2,"Let the numbers be n and n + 1.","n + (n + 1) = 95 → 2n = 94 → n = 47. Larger = 48.","Answering with n (47) instead of n + 1."],
+["Squares & Roots",1,"What is √196?",["12","13","14","16"],2,"Try numbers whose square ends in 6.","14 × 14 = 196, so √196 = 14.","Mixing it up with 13² = 169."],
+["Squares & Roots",2,"Smallest number to multiply 72 by to get a perfect square?",["2","3","6","8"],0,"Write 72 as prime factors.","72 = 2×2×2×3×3. The prime 2 appears 3 times (odd), so multiply by 2 to get 144 = 12².","Picking 8: it works (576) but is not the smallest."],
+["Cubes",2,"What is the cube root of 1728?",["10","12","14","16"],1,"The cube ends in 8, so the root ends in 2.","12 × 12 × 12 = 1728.","Confusing cube root with square root."],
+["Exponents",1,"Simplify: 2⁵ × 2³",["2⁸","2¹⁵","4⁸","2²"],0,"Same base: what happens to the powers?","Multiplying powers of the same base adds exponents: 2⁵⁺³ = 2⁸.","Multiplying the exponents (5 × 3 = 15)."],
+["Identities",2,"Expand: (x + 5)²",["x² + 25","x² + 10x + 25","x² + 5x + 25","x² + 10x + 10"],1,"Use (a + b)² = a² + 2ab + b².","a = x, b = 5: x² + 2(x)(5) + 25.","Dropping the middle term 2ab."],
+["Factorisation",2,"Factorise: x² − 9",["(x − 3)²","(x + 3)(x − 3)","(x + 9)(x − 1)","(x − 9)(x + 1)"],1,"It is a difference of two squares.","x² − 9 = x² − 3² = (x + 3)(x − 3).","Treating it as a perfect square."],
+["Comparing Quantities",2,"A shirt costs ₹800. After a 15% discount, what is the price?",["₹640","₹680","₹700","₹720"],1,"Find 15% of 800, then subtract.","15% of 800 = 120. Price = 800 − 120 = ₹680.","Stopping at the discount (₹120)."],
+["Rational Numbers",2,"Find: −3/4 + 5/6",["1/12","2/10","−1/12","7/12"],0,"Use the LCM of 4 and 6.","LCM = 12: −9/12 + 10/12 = 1/12.","Adding numerators and denominators directly."],
+["Mensuration",3,"Area of a trapezium: parallel sides 10 cm and 14 cm, height 6 cm?",["60 cm²","72 cm²","84 cm²","144 cm²"],1,"Area = ½ × (sum of parallel sides) × height.","½ × (10 + 14) × 6 = 72 cm².","Forgetting the ½ (gives 144)."]],
+9:[
+["Number Systems",1,"Which of these is irrational?",["√25","0.333…","√7","7/9"],2,"Perfect squares and repeating decimals are rational.","√25 = 5, 0.333… = 1/3 and 7/9 are rational. √7 is not a perfect square, so it is irrational.","Thinking a repeating decimal is irrational."],
+["Number Systems",2,"Express 0.777… as p/q",["7/10","7/9","70/99","9/7"],1,"Let x = 0.777…, then compute 10x − x.","10x = 7.777…, so 9x = 7 and x = 7/9.","Writing 7/10, which is just 0.7."],
+["Polynomials",1,"Degree of 5x³ − 2x² + 7",["1","2","3","7"],2,"Look for the highest power of x.","The highest power is x³, so the degree is 3.","Picking the constant 7."],
+["Polynomials",2,"Find the zero of p(x) = 2x − 6",["−3","3","6","12"],1,"Set p(x) = 0.","2x − 6 = 0 → 2x = 6 → x = 3.","Sign slip when moving 6 across."],
+["Polynomials",3,"Remainder when x³ − 2x² + x − 5 is divided by (x − 2)?",["−3","3","−5","5"],0,"Remainder Theorem: evaluate p(2).","p(2) = 8 − 8 + 2 − 5 = −3.","Evaluating p(−2) instead."],
+["Linear Eq. in 2 Variables",2,"If (2, k) lies on the line x + y = 7, find k",["3","4","5","9"],2,"Substitute x = 2.","2 + k = 7 → k = 5.","Putting 2 in for y."],
+["Lines & Angles",1,"Two angles are supplementary. One is 65°. The other is…",["25°","115°","125°","295°"],1,"Supplementary angles add up to 180°.","180° − 65° = 115°.","Using 90° (complementary): 25°."],
+["Triangles",2,"Angles of a triangle are in the ratio 2 : 3 : 4. The largest angle?",["60°","70°","80°","90°"],2,"Split 180° into 2 + 3 + 4 parts.","9 parts, each 20°. Largest = 4 × 20° = 80°.","Dividing 180 by 3 instead of 9."],
+["Heron's Formula",3,"Area of a triangle with sides 13, 14 and 15 cm?",["84 cm²","90 cm²","96 cm²","105 cm²"],0,"Find the semi-perimeter s first.","s = 21. Area = √(21×8×7×6) = √7056 = 84 cm².","Using the perimeter instead of s."],
+["Surface Areas",2,"CSA of a cylinder, r = 7 cm, h = 10 cm? (π = 22/7)",["220 cm²","440 cm²","490 cm²","1540 cm²"],1,"CSA = 2πrh.","2 × 22/7 × 7 × 10 = 440 cm².","Using πr²h, the volume formula."],
+["Statistics",2,"Mean of 4, 8, 10, 12, 16?",["8","9","10","12"],2,"Add all values, divide by the count.","Sum = 50; 50 ÷ 5 = 10.","Dividing by 4 instead of 5."],
+["Identities",3,"If x + y = 10 and xy = 21, find x² + y²",["58","79","100","121"],0,"Rewrite x² + y² using (x + y)².","x² + y² = (x + y)² − 2xy = 100 − 42 = 58.","Forgetting to double xy."]]};
+for(const g in Q)Q[g]=Q[g].map((a,i)=>({id:g+"-"+i,t:a[0],d:a[1],q:a[2],o:a[3],a:a[4],h:a[5],e:a[6],m:a[7]}));
+const TRIAL=8,CAP=5,$=s=>document.querySelector(s);
+const LV=[[0,"Seedling"],[50,"Sprout"],[120,"Scholar"],[220,"Expert"],[350,"Champion"]];
+let S,cache={},st={db:0,claude:0,hit:0};
+function fresh(){S={g:null,seen:{8:[],9:[]},u:{8:0,9:0},unl:{},xp:0,streak:0,r:2,tok:3,ok:0,n:0,dx:0,cur:null,ans:0,hint:0,weak:{}}}
+const lvl=()=>LV.filter(l=>S.xp>=l[0]).pop()[1];
+const band=()=>S.r<1.5?"Beginner":S.r<2.2?"Developing":S.r<2.8?"Proficient":"Advanced";
+function bar(){
+$("#bar").innerHTML=`<span>⭐ ${S.xp} XP · ${lvl()}</span><span>🔥 ${S.streak}</span><span>💡 ${S.tok} hints</span><span>📈 ${band()}</span>`;
+const nv=(st.db+st.hit+st.claude)*.004,ac=st.claude*.004;
+$("#bts").innerHTML=`<table><tr><td>Served from database</td><td><b>${st.db}</b> (questions, hints, explanations)</td></tr><tr><td>Deep Explain cache hits</td><td><b class=hit>${st.hit}</b> · $0.00</td></tr><tr><td>Claude calls at student time</td><td><b class=miss>${st.claude}</b> (cache misses only)</td></tr><tr><td>Cost if every view called AI</td><td>≈ $${nv.toFixed(3)}</td></tr><tr><td>Actual AI cost</td><td>≈ $${ac.toFixed(3)}</td></tr></table><p class=mu>Tip: tap “Explain more” on a question, then press “New student” and get the same question again. The second student gets it from cache instantly. Costs are illustrative.</p>`}
+function reset(){fresh();home()}
+function home(){S.g=null;bar();$("#m").innerHTML=`<h2>Pick your grade</h2><p class=mu>CBSE · Mathematics · adaptive practice</p>`+[8,9].map(g=>`<button class="card" onclick="start(${g})"><b>Grade ${g} Maths</b><small>${Q[g].length} questions · ${S.unl[g]?"✅ Unlocked forever":"Free trial: "+TRIAL+" questions"}</small></button>`).join("")+`<p class=mu>Model shown: free trial → subject unlock (₹79) → every answer, hint and explanation is stored once and served from the database.</p><a class="card" style="text-decoration:none;text-align:center;background:#25D366;color:#fff;border:0;font-weight:800" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent('Try this EduQuest maths practice demo (CBSE Grade 8 & 9): https://claude.ai/artifact/3RNnYXPGcAwWhV2Yo5FPv3')}">💬 Share on WhatsApp</a>`}
+function start(g){S.g=g;next()}
+function next(){const g=S.g;
+if(!S.unl[g]&&S.u[g]>=TRIAL)return paywall();
+const pool=Q[g].filter(q=>!S.seen[g].includes(q.id));if(!pool.length)return result();
+const tg=Math.max(1,Math.min(3,Math.round(S.r)));
+pool.sort((a,b)=>Math.abs(a.d-tg)+Math.random()*.6-Math.abs(b.d-tg)-Math.random()*.6);
+S.cur=pool[0];S.ans=0;S.hint=0;S.seen[g].push(S.cur.id);S.u[g]++;st.db++;bar();
+const q=S.cur;
+$("#m").innerHTML=`<div class=q><span class=tag>${q.t}</span> <span class=tag>Level ${q.d}</span> <span class=tag>✔ approved · ✔ original</span>
+<p class=mu>${S.unl[g]?"Question "+S.seen[g].length+" of "+Q[g].length:"Free trial "+S.u[g]+" / "+TRIAL}</p><h3>${q.q}</h3>
+${q.o.map((o,i)=>`<button class=o id=o${i} onclick="ans(${i})">${o}</button>`).join("")}
+<div id=hn></div><div id=fb></div></div><div class=row id=ac><button class=g onclick="hint()">💡 Hint (1 token)</button><button class=g onclick="home()">Exit</button></div>`}
+function hint(){if(S.ans||S.hint)return;if(S.tok<1){$("#hn").innerHTML=`<div class=fb>No hint tokens left. Earn them with 5-answer streaks.</div>`;return}
+S.tok--;S.hint=1;st.db++;bar();$("#hn").innerHTML=`<div class=fb>💡 ${S.cur.h} <span class=mu>(XP halved)</span></div>`}
+function ans(i){if(S.ans)return;S.ans=1;const q=S.cur,ok=i==q.a;S.n++;st.db++;
+$("#o"+q.a).classList.add("ok");if(!ok)$("#o"+i).classList.add("no");
+if(ok){S.ok++;S.streak++;S.r+=.35;S.xp+=Math.round(10*q.d/(S.hint?2:1));if(S.streak%5==0)S.tok++}
+else{S.streak=0;S.r=Math.max(.5,S.r-.5);S.weak[q.t]=(S.weak[q.t]||0)+1}
+bar();
+$("#fb").innerHTML=ok?`<div class=fb>🎉 Correct! +${Math.round(10*q.d/(S.hint?2:1))} XP<details><summary>Show explanation</summary>${q.e}</details></div>`:`<div class=fb>❌ Not quite. <b>Explanation:</b> ${q.e}</div>`;
+$("#ac").innerHTML=`<button class=g onclick="deep()">🧠 Explain more (${S.dx}/${CAP})</button><button onclick="next()">Next →</button>`}
+function deep(){const q=S.cur,k=q.id;
+if(S.dx>=CAP){$("#fb").innerHTML+=`<div class=fb>You have used all ${CAP} AI explanations for today. Come back tomorrow!</div>`;return}
+S.dx++;const show=(tag)=>{$("#fb").innerHTML+=`<div class=fb><b>AI Explanation</b> · ${tag}<br>Let's go step by step. ${q.e}<br><br>⚠️ Common slip: ${q.m}</div>`;bar();$("#ac").firstChild.textContent=`🧠 Explain more (${S.dx}/${CAP})`};
+if(cache[k]){cache[k]++;st.hit++;show(`<span class=hit>⚡ cache HIT · $0.00 · instant</span>`)}
+else{$("#fb").innerHTML+=`<div class=fb id=sp>Asking Claude Sonnet…</div>`;setTimeout(()=>{$("#sp").remove();cache[k]=1;st.claude++;show(`<span class=miss>🧠 cache MISS · Claude called once, now stored for everyone (simulated)</span>`)},900)}}
+function paywall(){const g=S.g;bar();$("#m").innerHTML=`<div class=q><h3>You've explored Grade ${g} Maths 🎯</h3><p>Unlock it forever for <b>₹79</b>. One-time, no subscription.</p>
+<p class=mu>Product ID: eduquest_in_g${g}_math_unlock<br>Also available: Core 3 Pack ₹179 · Full Grade ₹249 · Annual All-Access ₹999/yr</p>
+<div class=row><button onclick="S.unl[${g}]=1;next()">Unlock (simulated purchase)</button><button class=g onclick="home()">Not now</button></div></div>`}
+function result(){const w=Object.entries(S.weak).sort((a,b)=>b[1]-a[1]).map(x=>x[0]).slice(0,3);
+$("#m").innerHTML=`<div class=q><h3>Session complete 🏆</h3><p>Score: <b>${S.ok} / ${S.n}</b> · XP <b>${S.xp}</b> · ${lvl()}<br>Skill level: <b>${band()}</b></p><p>${w.length?"Practise next: <b>"+w.join(", ")+"</b>":"No weak topics. Great work!"}</p>
+<div class=row><button onclick="S.seen[S.g]=[];next()">Practise again</button><button class=g onclick="home()">Grades</button></div></div>`}
+reset();
+</script></body></html>
