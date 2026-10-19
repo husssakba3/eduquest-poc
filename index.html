@@ -121,7 +121,7 @@ const out=[],seen=new Set();for(let k=0;k<80&&out.length<12;k++){const x=G[g][k%
 return out.map((x,i)=>({...x,id:g+"-"+i}))}
 GR.forEach(g=>Q[g]=R[g]?R[g].map((a,i)=>({id:g+"-"+i,t:a[0],d:a[1],q:a[2],o:a[3],a:a[4],h:a[5],e:a[6],m:a[7]})):build(g));
 // After deploying: paste your GitHub Pages URL and your Apps Script web-app URL below
-const SITE_URL="",FEEDBACK_URL="",TRIAL=8,CAP=5,$=s=>document.querySelector(s);
+const SITE_URL="https://husssakba3.github.io/eduquest-poc/",FEEDBACK_URL="https://script.google.com/macros/s/AKfycbypm6urJRt_f3bY9UlK0s0n1U03TPr9ONGF4K5yCsWF9JF49E9Ttj0iAyf9pA80X_ou6Q/exec",TRIAL=8,CAP=5,$=s=>document.querySelector(s);
 const LV=[[0,"Seedling"],[50,"Sprout"],[120,"Scholar"],[220,"Expert"],[350,"Champion"]];
 let S,cache={},st={db:0,claude:0,hit:0};
 function fresh(){S={g:null,seen:Object.fromEntries(GR.map(g=>[g,[]])),u:Object.fromEntries(GR.map(g=>[g,0])),unl:{},xp:0,streak:0,r:2,tok:3,ok:0,n:0,dx:0,cur:null,ans:0,hint:0,weak:{}}}
