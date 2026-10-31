@@ -1,5 +1,5 @@
 // Google Apps Script: collects EduQuest feedback into a Google Sheet.
-const PASS = 'change-me'; // admin passcode, change this before deploying
+const PASS = 'TestTheApp1947'; // admin passcode, change this before deploying
 
 function sheet_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();

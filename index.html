@@ -1,183 +1,140 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#1A1A2E"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
-<title>EduQuest · CBSE Maths POC</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EduQuest · CBSE Maths</title>
 <style>
-:root{--bg:#F8F9FF;--sf:#fff;--tx:#1A1A2E;--mu:#5b5f7a;--ac:#E94560;--bl:#0F3460;--ok:#2ECC71;--wn:#F39C12;--bd:#e1e4f2;--hl:#eef1ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12121f;--sf:#1d1d33;--tx:#f1f2fa;--mu:#a3a7c4;--bd:#2f3052;--bl:#7aa7ff;--hl:#26274a}}
-:root[data-theme="dark"]{--bg:#12121f;--sf:#1d1d33;--tx:#f1f2fa;--mu:#a3a7c4;--bd:#2f3052;--bl:#7aa7ff;--hl:#26274a}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Nunito,system-ui,sans-serif}
-.w{max-width:520px;margin:0 auto;padding:12px 14px 40px}
-header{display:flex;justify-content:space-between;align-items:center;gap:8px}
-h1{font-size:20px;margin:0;font-weight:800}h1 span{color:var(--ac)}h2{margin:18px 0 4px;font-size:20px}
-.tag{font-size:11px;background:var(--hl);color:var(--bl);padding:2px 8px;border-radius:99px;font-weight:800}
-button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:800;background:var(--ac);color:#fff;min-height:48px}
-button.g{background:var(--hl);color:var(--bl)}button.s{min-height:36px;padding:6px 12px;font-size:13px}
-.card{display:block;width:100%;text-align:left;background:var(--sf);color:var(--tx);border:2px solid var(--bd);margin:10px 0;padding:14px}
-.card small{display:block;color:var(--mu);font-weight:600}
-#bar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;font-size:13px;font-weight:800}
-#bar span{background:var(--sf);border:1px solid var(--bd);border-radius:99px;padding:3px 10px}
-.mu{color:var(--mu);font-size:14px}.q{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:16px;margin:10px 0}
-.q h3{margin:6px 0 0;font-size:21px;line-height:1.3}
-.o{display:block;width:100%;text-align:left;background:var(--sf);color:var(--tx);border:2px solid var(--bd);margin:8px 0}
-.o.ok{border-color:var(--ok);background:rgba(46,204,113,.18)}.o.no{border-color:var(--ac);background:rgba(233,69,96,.15)}
-.fb{background:var(--hl);border-radius:12px;padding:12px;margin:10px 0;font-size:15px}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.row button{flex:1}
-details{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;margin-top:18px;font-size:14px}
-summary{font-weight:800;cursor:pointer}td{padding:2px 12px 2px 0}
-.hit{color:var(--ok);font-weight:800}.miss{color:var(--wn);font-weight:800}
-.gr{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.gr .card{margin:0}textarea,input{width:100%;font:inherit;color:var(--tx);background:var(--sf);border:2px solid var(--bd);border-radius:12px;padding:10px;margin:6px 0}textarea{min-height:110px}.em{display:flex;gap:8px}.em button{flex:1;font-size:24px;background:var(--hl)}.em button.on{outline:3px solid var(--ac)}header>div{display:flex;gap:6px}
-</style></head><body><div class="w">
-<header style="flex-wrap:wrap"><h1>Edu<span>Quest</span> <span class="tag">POC</span></h1><div><button class="g s" onclick="fb()">💬 Feedback</button><button class="g s" onclick="reset()">👤 New student</button></div></header>
-<div id="bar"></div><main id="m"></main>
-<details><summary>🔍 Behind the scenes (live)</summary><div id="bts"></div></details>
-<p class="mu">Demo with sample questions. Purchases and the AI explanation are simulated.</p>
-</div><script>
-const R={8:[
-["Linear Equations",1,"Solve: 3x + 7 = 22",["x = 3","x = 4","x = 5","x = 6"],2,"Isolate the x-term first.","Subtract 7 from both sides: 3x = 15. Divide by 3: x = 5.","Dividing 22 by 3 before subtracting 7."],
-["Linear Equations",2,"Solve: 2(x − 3) = x + 4",["x = 7","x = 8","x = 10","x = 12"],2,"Expand the bracket, then collect x terms.","2x − 6 = x + 4 → 2x − x = 4 + 6 → x = 10.","Forgetting to multiply −3 by 2."],
-["Linear Equations",3,"The sum of two consecutive numbers is 95. What is the larger number?",["46","47","48","49"],2,"Let the numbers be n and n + 1.","n + (n + 1) = 95 → 2n = 94 → n = 47. Larger = 48.","Answering with n (47) instead of n + 1."],
-["Squares & Roots",1,"What is √196?",["12","13","14","16"],2,"Try numbers whose square ends in 6.","14 × 14 = 196, so √196 = 14.","Mixing it up with 13² = 169."],
-["Squares & Roots",2,"Smallest number to multiply 72 by to get a perfect square?",["2","3","6","8"],0,"Write 72 as prime factors.","72 = 2×2×2×3×3. The prime 2 appears 3 times (odd), so multiply by 2 to get 144 = 12².","Picking 8: it works (576) but is not the smallest."],
-["Cubes",2,"What is the cube root of 1728?",["10","12","14","16"],1,"The cube ends in 8, so the root ends in 2.","12 × 12 × 12 = 1728.","Confusing cube root with square root."],
-["Exponents",1,"Simplify: 2⁵ × 2³",["2⁸","2¹⁵","4⁸","2²"],0,"Same base: what happens to the powers?","Multiplying powers of the same base adds exponents: 2⁵⁺³ = 2⁸.","Multiplying the exponents (5 × 3 = 15)."],
-["Identities",2,"Expand: (x + 5)²",["x² + 25","x² + 10x + 25","x² + 5x + 25","x² + 10x + 10"],1,"Use (a + b)² = a² + 2ab + b².","a = x, b = 5: x² + 2(x)(5) + 25.","Dropping the middle term 2ab."],
-["Factorisation",2,"Factorise: x² − 9",["(x − 3)²","(x + 3)(x − 3)","(x + 9)(x − 1)","(x − 9)(x + 1)"],1,"It is a difference of two squares.","x² − 9 = x² − 3² = (x + 3)(x − 3).","Treating it as a perfect square."],
-["Comparing Quantities",2,"A shirt costs ₹800. After a 15% discount, what is the price?",["₹640","₹680","₹700","₹720"],1,"Find 15% of 800, then subtract.","15% of 800 = 120. Price = 800 − 120 = ₹680.","Stopping at the discount (₹120)."],
-["Rational Numbers",2,"Find: −3/4 + 5/6",["1/12","2/10","−1/12","7/12"],0,"Use the LCM of 4 and 6.","LCM = 12: −9/12 + 10/12 = 1/12.","Adding numerators and denominators directly."],
-["Mensuration",3,"Area of a trapezium: parallel sides 10 cm and 14 cm, height 6 cm?",["60 cm²","72 cm²","84 cm²","144 cm²"],1,"Area = ½ × (sum of parallel sides) × height.","½ × (10 + 14) × 6 = 72 cm².","Forgetting the ½ (gives 144)."]],
-9:[
-["Number Systems",1,"Which of these is irrational?",["√25","0.333…","√7","7/9"],2,"Perfect squares and repeating decimals are rational.","√25 = 5, 0.333… = 1/3 and 7/9 are rational. √7 is not a perfect square, so it is irrational.","Thinking a repeating decimal is irrational."],
-["Number Systems",2,"Express 0.777… as p/q",["7/10","7/9","70/99","9/7"],1,"Let x = 0.777…, then compute 10x − x.","10x = 7.777…, so 9x = 7 and x = 7/9.","Writing 7/10, which is just 0.7."],
-["Polynomials",1,"Degree of 5x³ − 2x² + 7",["1","2","3","7"],2,"Look for the highest power of x.","The highest power is x³, so the degree is 3.","Picking the constant 7."],
-["Polynomials",2,"Find the zero of p(x) = 2x − 6",["−3","3","6","12"],1,"Set p(x) = 0.","2x − 6 = 0 → 2x = 6 → x = 3.","Sign slip when moving 6 across."],
-["Polynomials",3,"Remainder when x³ − 2x² + x − 5 is divided by (x − 2)?",["−3","3","−5","5"],0,"Remainder Theorem: evaluate p(2).","p(2) = 8 − 8 + 2 − 5 = −3.","Evaluating p(−2) instead."],
-["Linear Eq. in 2 Variables",2,"If (2, k) lies on the line x + y = 7, find k",["3","4","5","9"],2,"Substitute x = 2.","2 + k = 7 → k = 5.","Putting 2 in for y."],
-["Lines & Angles",1,"Two angles are supplementary. One is 65°. The other is…",["25°","115°","125°","295°"],1,"Supplementary angles add up to 180°.","180° − 65° = 115°.","Using 90° (complementary): 25°."],
-["Triangles",2,"Angles of a triangle are in the ratio 2 : 3 : 4. The largest angle?",["60°","70°","80°","90°"],2,"Split 180° into 2 + 3 + 4 parts.","9 parts, each 20°. Largest = 4 × 20° = 80°.","Dividing 180 by 3 instead of 9."],
-["Heron's Formula",3,"Area of a triangle with sides 13, 14 and 15 cm?",["84 cm²","90 cm²","96 cm²","105 cm²"],0,"Find the semi-perimeter s first.","s = 21. Area = √(21×8×7×6) = √7056 = 84 cm².","Using the perimeter instead of s."],
-["Surface Areas",2,"CSA of a cylinder, r = 7 cm, h = 10 cm? (π = 22/7)",["220 cm²","440 cm²","490 cm²","1540 cm²"],1,"CSA = 2πrh.","2 × 22/7 × 7 × 10 = 440 cm².","Using πr²h, the volume formula."],
-["Statistics",2,"Mean of 4, 8, 10, 12, 16?",["8","9","10","12"],2,"Add all values, divide by the count.","Sum = 50; 50 ÷ 5 = 10.","Dividing by 4 instead of 5."],
-["Identities",3,"If x + y = 10 and xy = 21, find x² + y²",["58","79","100","121"],0,"Rewrite x² + y² using (x + y)².","x² + y² = (x + y)² − 2xy = 100 − 42 = 58.","Forgetting to double xy."]]};
-const GR=[1,2,3,4,5,6,7,8,9,10],Q={},fmt=n=>String(n).replace("-","−");
-function mb(a){return function(){var t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
-function build(g){const r=mb(g*977+13),ri=(a,b)=>a+Math.floor(r()*(b-a+1)),pk=a=>a[Math.floor(r()*a.length)];
-const mk=(t,d,q,n,h,e,m,o={})=>{const f=o.f||fmt,s=o.s||1,ans=typeof n=="string"?n:f(n);let w=(o.w||[]).map(x=>typeof x=="string"?x:f(x));
-if(typeof n!="string")w=w.concat([n+s,n-s,n+2*s,n-2*s,n+10*s].filter(x=>n<0||x>=0).map(f));
-const op=[ans];w.forEach(x=>{if(!op.includes(x)&&op.length<4)op.push(x)});while(op.length<4)op.push(String(ri(11,99)));
-op.sort(()=>r()-.5);return{t,d,q,o:op,a:op.indexOf(ans),h,e,m}};
-const cm=n=>n+" cm",rs=n=>"₹"+n;
+:root{color-scheme:light dark;--bg:#f5f7fb;--c:#fff;--t:#1b2233;--m:#6b7488;--p:#5b5bd6;--g:#16a34a;--r:#e11d48;--l:#e3e7f1}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1219;--c:#1a1f2c;--t:#eef1f8;--m:#9aa3b8;--p:#8b8bff;--l:#2b3246}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:16px/1.45 system-ui,-apple-system,sans-serif}
+main,.hb{max-width:640px;margin:auto;padding:12px 14px}main{padding-bottom:70px}
+.hb{display:flex;gap:10px;align-items:center;font-weight:600;font-size:14px}.hb b{flex:1;font-size:18px;cursor:pointer}
+button,.btn{font:inherit;color:inherit;background:var(--c);border:1px solid var(--l);border-radius:12px;padding:10px 14px;min-height:44px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+button:disabled{opacity:.5}.pri,.on{background:var(--p)!important;color:#fff;border-color:var(--p)}
+.card{background:var(--c);border:1px solid var(--l);border-radius:16px;padding:16px;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.gb{position:relative;flex-direction:column;overflow:hidden;padding:12px 4px}.gb b{font-size:22px}.gb small{color:var(--m)}.gb i{position:absolute;left:0;bottom:0;height:4px;background:var(--g)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cc{flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:12px}.pl{font-size:26px}.cc small,.cap{color:var(--m);font-size:13px}
+.tabs,.chips{display:flex;gap:6px;overflow-x:auto;margin:10px 0}.tabs button,.chips button{white-space:nowrap;min-height:38px;padding:6px 12px;flex:1}
+.link{border:0;background:none;color:var(--p);padding:6px 0;min-height:36px}
+.trk{margin:8px 0}.lane{position:relative;height:12px;background:var(--l);border-radius:9px;margin:26px 14px 6px}.fill{height:100%;background:linear-gradient(90deg,#34d399,#5b5bd6);border-radius:9px;transition:width .5s}
+.hero{position:absolute;top:-24px;font-size:24px;margin-left:-12px;transition:left .5s}.fl{position:absolute;top:14px;font-size:14px;margin-left:-8px;filter:grayscale(1);opacity:.5}.fl.on{filter:none;opacity:1}
+.cap{text-align:center;margin-top:18px}
+.dots{display:flex;gap:5px;justify-content:center;margin-top:8px}.dt{width:26px;height:26px;border-radius:50%;border:2px solid var(--l);font-size:11px;display:grid;place-items:center;cursor:pointer;font-weight:600}.dt.ok{background:var(--g);border-color:var(--g);color:#fff}.dt.bad{background:var(--r);border-color:var(--r);color:#fff}.dt.sk{border-style:dashed;border-color:#f59e0b}.dt.cur{outline:3px solid var(--p);outline-offset:1px}
+.tag{color:var(--m);font-size:13px}h3{margin:6px 0 12px;font-size:20px}
+.op{display:flex;width:100%;justify-content:flex-start;margin:8px 0;font-size:18px;min-height:52px}.op.ok{background:var(--g);color:#fff;border-color:var(--g);opacity:1}.op.bad{background:var(--r);color:#fff;border-color:var(--r);opacity:1}
+.ex,.hint{border-radius:12px;padding:10px 12px;margin:10px 0;font-size:15px;background:var(--bg)}.ex.g{border-left:4px solid var(--g)}.ex.r{border-left:4px solid var(--r)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:8px}.nav span{color:var(--m)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.row2{display:flex;gap:8px;align-items:center;padding:10px;border-bottom:1px solid var(--l);cursor:pointer}.row2 span{flex:1;min-width:0;font-size:15px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.row2 em{font-style:normal;font-size:12px;background:var(--bg);border-radius:8px;padding:2px 8px;color:var(--m);white-space:nowrap;max-width:40%;overflow:hidden;text-overflow:ellipsis}
+.ov{position:fixed;inset:0;background:#0008;display:grid;place-items:center;padding:14px;z-index:9}.ov .card{width:100%;max-width:420px}.emo{display:flex;gap:8px}.emo button{font-size:26px;flex:1}
+textarea,input{width:100%;font:inherit;margin:8px 0;padding:10px;border-radius:12px;border:1px solid var(--l);background:var(--bg);color:var(--t)}
+.bt{margin-top:18px;font-size:13px;color:var(--m)}
+</style></head><body><div id="bar"></div><main id="app"></main>
+<script>
+const FEEDBACK_URL="https://script.google.com/macros/s/AKfycbypm6urJRt_f3bY9UlK0s0n1U03TPr9ONGF4K5yCsWF9JF49E9Ttj0iAyf9pA80X_ou6Q/exec",SITE_URL="https://husssakba3.github.io/eduquest-poc/",FREE=100; // FREE = free questions per class before the simulated Rs 79 unlock (set 8 to demo the paywall)
+const ls={g:k=>{try{return localStorage.getItem(k)}catch(e){return null}},s:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>'&#'+c.charCodeAt(0)+';');
+const rng=s=>{let a=s;return(lo,hi)=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return lo+Math.floor(((t^t>>>14)>>>0)/4294967296*(hi-lo+1))}};
+const gcd=(a,b)=>b?gcd(b,a%b):a,P=v=>v<0?`(${v})`:v,sg=v=>(v<0?'− ':'+ ')+Math.abs(v);
+const M=[0,20,50,200,999,2000,5000,9999,9999,9999,9999],PL=['ones','tens','hundreds','thousands'];
+const TR=[['sin 30°','1/2'],['cos 60°','1/2'],['sin 90°','1'],['cos 0°','1'],['tan 45°','1'],['sin 0°','0'],['cos 90°','0'],['sin 60°','√3/2'],['cos 30°','√3/2'],['tan 30°','1/√3']];
+const TRI=[[3,4,5],[5,12,13],[8,15,17],[7,24,25],[20,21,29]];
 const G={
-1:[()=>{const a=ri(2,9),b=ri(2,9);return mk("Addition",1,`${a} + ${b} = ?`,a+b,"Count on from the bigger number.",`${a} + ${b} = ${a+b}.`,"Counting the first number twice.")},
-()=>{const a=ri(10,20),b=ri(1,9);return mk("Subtraction",1,`${a} − ${b} = ?`,a-b,"Count back from the first number.",`${a} − ${b} = ${a-b}.`,"Counting forward instead of back.")},
-()=>{const n=ri(1,19);return mk("Counting",1,`What number comes after ${n}?`,n+1,"Count one more.",`After ${n} comes ${n+1}.`,"Choosing the number before.")},
-()=>{const n=ri(2,20);return mk("Counting",1,`What number comes just before ${n}?`,n-1,"Count one back.",`Just before ${n} is ${n-1}.`,"Choosing the number after.")},
-()=>{const a=ri(1,20);let b=ri(1,20);if(b==a)b=a%20+1;const M=Math.max(a,b);return mk("Comparing",1,`Which is bigger: ${a} or ${b}?`,M,"The bigger number comes later when counting.",`${M} comes later when counting, so it is bigger.`,"Picking the smaller number.",{w:[Math.min(a,b)]})},
-()=>{const s=pk([2,5,10]);return mk("Skip Counting",1,`${s}, ${2*s}, ${3*s}, ?`,4*s,`Add ${s} each time.`,`Each number grows by ${s}, so next is ${4*s}.`,"Adding 1 instead of the step.")}],
-2:[()=>{const a=ri(11,60),b=ri(11,39);return mk("Addition",1,`${a} + ${b} = ?`,a+b,"Add the ones, then the tens.",`${a} + ${b} = ${a+b}.`,"Forgetting to carry.",{w:[a+b+10,a+b-10]})},
-()=>{const a=ri(40,99),b=ri(11,39);return mk("Subtraction",1,`${a} − ${b} = ?`,a-b,"Subtract the tens, then the ones.",`${a} − ${b} = ${a-b}.`,"Subtracting the smaller digit from the bigger one in each column.")},
-()=>{const a=pk([2,5,10]),b=ri(2,10);return mk("Tables",1,`${a} × ${b} = ?`,a*b,`Skip count by ${a}, ${b} times.`,`${a} × ${b} = ${a*b}.`,"Adding instead of multiplying.",{w:[a+b]})},
-()=>{const t=ri(2,9),u=ri(1,9);return mk("Place Value",2,`In ${t*10+u}, what is the value of the digit ${t}?`,t*10,"Is the digit in the tens or ones place?",`${t} is in the tens place: ${t} × 10 = ${t*10}.`,"Giving the digit, not its place value.",{w:[t,u]})},
-()=>{const s=pk([3,4]);return mk("Skip Counting",1,`${s}, ${2*s}, ${3*s}, ?`,4*s,`Add ${s} each time.`,`Each number grows by ${s}, so next is ${4*s}.`,"Adding 1 instead of the step.")},
-()=>{const a=ri(10,50),b=ri(10,40);return mk("Money",2,`Tara has ₹${a} and gets ₹${b} more. How much now?`,a+b,"Add the two amounts.",`${a} + ${b} = ${a+b}.`,"Subtracting by mistake.",{f:rs})}],
-3:[()=>{const a=ri(120,480),b=ri(120,480);return mk("Addition",1,`${a} + ${b} = ?`,a+b,"Add ones, tens, then hundreds.",`${a} + ${b} = ${a+b}.`,"Forgetting a carry.",{w:[a+b+100,a+b-10]})},
-()=>{const a=ri(3,9),b=ri(6,9);return mk("Tables",2,`${a} × ${b} = ?`,a*b,"Use the table of "+a+".",`${a} × ${b} = ${a*b}.`,"Mixing up neighbouring table facts.",{w:[a*b+a,a*b-a]})},
-()=>{const b=ri(2,9),c=ri(3,9);return mk("Division",2,`${b*c} ÷ ${b} = ?`,c,"Ask: "+b+" times what gives "+b*c+"?",`${b} × ${c} = ${b*c}, so ${b*c} ÷ ${b} = ${c}.`,"Multiplying instead of dividing.")},
-()=>{const d=pk([2,4]),k=ri(2,9);return mk("Fractions",2,`What is 1/${d} of ${d*k}?`,k,`Split ${d*k} into ${d} equal parts.`,`${d*k} ÷ ${d} = ${k}.`,"Multiplying by the denominator.")},
-()=>{const a=ri(300,900),b=ri(120,299);return mk("Subtraction",2,`${a} − ${b} = ?`,a-b,"Borrow from the next place when needed.",`${a} − ${b} = ${a-b}.`,"Forgetting to borrow.",{w:[a-b+10,a-b-10]})},
-()=>{const a=ri(50,99),b=ri(11,40);return mk("Length",2,`A ribbon is ${a} cm long. ${b} cm is cut off. How long is the rest?`,a-b,"Subtract the piece cut off.",`${a} − ${b} = ${a-b} cm.`,"Adding instead of subtracting.",{f:cm})}],
-4:[()=>{const a=ri(12,49),b=ri(3,9);return mk("Multiplication",2,`${a} × ${b} = ?`,a*b,"Multiply the ones, then the tens.",`${a} × ${b} = ${a*b}.`,"Forgetting to add the carry.",{w:[a*b+10,a*b-10]})},
-()=>{const b=ri(3,9),c=ri(11,30);return mk("Division",2,`${b*c} ÷ ${b} = ?`,c,"Use long division, one digit at a time.",`${b} × ${c} = ${b*c}, so the answer is ${c}.`,"Dropping a digit in the quotient.")},
-()=>{const l=ri(5,15),w=ri(3,l-1);return mk("Perimeter",2,`A rectangle is ${l} cm long and ${w} cm wide. What is its perimeter?`,2*(l+w),"Add all four sides.",`2 × (${l} + ${w}) = ${2*(l+w)} cm.`,"Adding only two sides.",{f:cm,w:[l+w,l*w]})},
-()=>{const a=ri(3,9);return mk("Multiples",2,`What is the 6th multiple of ${a}?`,6*a,`Multiply ${a} by 6.`,`${a} × 6 = ${6*a}.`,"Using the 5th or 7th multiple.",{w:[5*a,7*a,a+6]})},
-()=>{const k=ri(3,12);return mk("Fractions",3,`What is 3/4 of ${4*k}?`,3*k,"Find 1/4 first, then multiply by 3.",`1/4 of ${4*k} = ${k}, so 3/4 = ${3*k}.`,"Stopping at 1/4.")},
-()=>{const a=ri(12,45),b=ri(3,6);return mk("Money",2,`A notebook costs ₹${a}. What do ${b} notebooks cost?`,a*b,"Multiply price by number of notebooks.",`${a} × ${b} = ${a*b}.`,"Adding instead of multiplying.",{f:rs})}],
-5:[()=>{const[a,b,h]=pk([[12,18,6],[24,36,12],[20,30,10],[16,24,8],[18,27,9],[30,45,15]]);return mk("HCF",3,`What is the HCF of ${a} and ${b}?`,h,"Find the biggest number that divides both.",`The greatest common factor of ${a} and ${b} is ${h}.`,"Giving a common factor that is not the greatest.")},
-()=>{const[a,b,l]=pk([[4,6,12],[6,8,24],[3,5,15],[4,10,20],[6,9,18],[8,12,24]]);return mk("LCM",3,`What is the LCM of ${a} and ${b}?`,l,"List multiples of each number.",`The smallest common multiple of ${a} and ${b} is ${l}.`,"Giving the product instead.",{w:[a*b]})},
-()=>{const x=ri(11,89),y=ri(11,89);return mk("Decimals",2,`${(x/10).toFixed(1)} + ${(y/10).toFixed(1)} = ?`,(x+y)/10,"Line up the decimal points.",`${(x/10).toFixed(1)} + ${(y/10).toFixed(1)} = ${((x+y)/10).toFixed(1)}.`,"Ignoring the decimal point.",{f:v=>v.toFixed(1),s:.1})},
-()=>{const l=ri(6,20),w=ri(4,l-1);return mk("Area",2,`A rectangle is ${l} cm by ${w} cm. What is its area?`,l*w,"Area = length × width.",`${l} × ${w} = ${l*w} cm².`,"Adding the sides instead.",{f:n=>n+" cm²",w:[2*(l+w)]})},
-()=>{const d=ri(6,12),a=ri(1,3),b=ri(1,3);return mk("Fractions",3,`${a}/${d} + ${b}/${d} = ?`,a+b,"Same denominator: add only the tops.",`${a} + ${b} = ${a+b}, so the answer is ${a+b}/${d}.`,"Adding the denominators too.",{f:n=>n+"/"+d,w:[`${a+b}/${2*d}`]})},
-()=>{const n=ri(2,9)*10;return mk("Percentage",3,`What is 10% of ${n}?`,n/10,"10% means one tenth.",`${n} ÷ 10 = ${n/10}.`,"Multiplying by 10.")}],
-6:[()=>{const a=ri(2,15),b=ri(2,15);return mk("Integers",2,`−${a} + ${b} = ?`,b-a,"Move right on the number line by "+b+".",`−${a} + ${b} = ${b-a}.`,"Ignoring the negative sign.",{w:[a+b,a-b]})},
-()=>{const[a,b,h]=pk([[36,48,12],[42,56,14],[45,60,15],[54,72,18]]);return mk("HCF",3,`Find the HCF of ${a} and ${b}.`,h,"Use prime factorisation.",`The greatest common factor of ${a} and ${b} is ${h}.`,"Choosing a smaller common factor.")},
-()=>{const p=ri(2,5),q=p+ri(1,3),k=ri(2,6);return mk("Ratio",3,`Simplify the ratio ${k*p}:${k*q}`,`${p}:${q}`,"Divide both parts by the same number.",`Divide both by ${k}: ${p}:${q}.`,"Reversing the ratio.",{w:[`${q}:${p}`,`${k*p}:${q}`,`${p}:${k*q}`]})},
-()=>{const x=ri(2,9),a=ri(2,6),b=ri(1,9);return mk("Algebra",3,`If x = ${x}, find the value of ${a}x + ${b}`,a*x+b,"Replace x with the number.",`${a} × ${x} + ${b} = ${a*x+b}.`,"Writing ax as a digit pair.",{w:[a+x+b]})},
-()=>{const n=ri(1,4),d=ri(2,6),k=ri(2,5);return mk("Fractions",2,`${n}/${d} = ?/${k*d}`,n*k,"Multiply top and bottom by the same number.",`${d} × ${k} = ${k*d}, so the top is ${n} × ${k} = ${n*k}.`,"Multiplying only the bottom.",{w:[n,k]})},
-()=>{const p=pk([17,19,23,29,31,37]);return mk("Primes",2,"Which of these is a prime number?",p,"A prime has exactly two factors.",`${p} is only divisible by 1 and itself.`,"Choosing an odd number that is not prime.",{w:[21,27,33,39,51,49]})}],
-7:[()=>{const a=ri(2,9),b=ri(2,9);return mk("Integers",2,`(−${a}) × ${b} = ?`,-a*b,"Negative × positive is negative.",`${a} × ${b} = ${a*b}, with a negative sign: −${a*b}.`,"Dropping the negative sign.",{w:[a*b]})},
-()=>{const a=ri(2,6),x=ri(2,9),b=ri(1,9);return mk("Equations",3,`Solve: ${a}x − ${b} = ${a*x-b}`,x,"Add "+b+" to both sides, then divide.",`${a}x = ${a*x}, so x = ${x}.`,"Not doing the same step on both sides.")},
-()=>{const p=pk([20,25,40,50]),n=ri(1,9)*20;return mk("Percentage",3,`What is ${p}% of ${n}?`,n*p/100,`${p}% = ${p}/100.`,`${n} × ${p} ÷ 100 = ${n*p/100}.`,"Forgetting to divide by 100.")},
-()=>{const a=ri(2,6),c=ri(5,15),b=ri(7,12);return mk("Proportion",3,`${a} pens cost ₹${a*c}. What do ${b} pens cost?`,b*c,"Find the cost of one pen first.",`One pen = ₹${c}, so ${b} pens = ₹${b*c}.`,"Adding instead of scaling.",{f:rs})},
-()=>{const b=2*ri(2,6),h=ri(3,9);return mk("Triangles",3,`A triangle has base ${b} cm and height ${h} cm. What is its area?`,b*h/2,"Area = ½ × base × height.",`½ × ${b} × ${h} = ${b*h/2} cm².`,"Forgetting the ½.",{f:n=>n+" cm²",w:[b*h]})},
-()=>{const a=ri(2,5);return mk("Exponents",2,`${a}³ = ?`,a**3,`${a}³ means ${a} × ${a} × ${a}.`,`${a} × ${a} × ${a} = ${a**3}.`,"Multiplying by 3 instead.",{w:[3*a,a*a]})}],
-10:[()=>{const x=ri(1,5),y=ri(x+1,8);return mk("Quadratic Equations",3,`Find the roots of x² − ${x+y}x + ${x*y} = 0`,`${x} and ${y}`,"Find two numbers with the right sum and product.",`x² − ${x+y}x + ${x*y} = (x − ${x})(x − ${y}) = 0, so x = ${x} or ${y}.`,"Getting the signs of the roots wrong.",{w:[`−${x} and −${y}`,`${x} and −${y}`,`${x+1} and ${y+1}`]})},
-()=>{const a=ri(2,9),d=ri(2,6),n=ri(8,15);return mk("Arithmetic Progressions",3,`Find the ${n}th term of the AP ${a}, ${a+d}, ${a+2*d}, …`,a+(n-1)*d,"Use aₙ = a + (n − 1)d.",`${a} + (${n} − 1) × ${d} = ${a+(n-1)*d}.`,"Using a + nd.",{w:[a+n*d,a+(n-2)*d,n*d]})},
-()=>{const a=ri(1,5),d=ri(1,4),n=2*ri(3,5);return mk("Arithmetic Progressions",3,`Find the sum of the first ${n} terms of the AP ${a}, ${a+d}, ${a+2*d}, …`,n/2*(2*a+(n-1)*d),"Use Sₙ = n/2 [2a + (n − 1)d].",`${n}/2 × (${2*a} + ${(n-1)*d}) = ${n/2*(2*a+(n-1)*d)}.`,"Forgetting the n/2.",{w:[n*(2*a+(n-1)*d)]})},
-()=>{const[q,a,w,e]=pk([["sin 30° + cos 60°","1",["1/2","√3/2","0"],"sin 30° = 1/2 and cos 60° = 1/2, so the sum is 1."],["tan 45° × sin 90°","1",["0","1/2","√2"],"tan 45° = 1 and sin 90° = 1, so the product is 1."],["2 sin 30° + tan 45°","2",["1","3","1/2"],"2 × 1/2 + 1 = 2."],["cos 0° + sin 90°","2",["1","0","√3"],"cos 0° = 1 and sin 90° = 1, so the sum is 2."]]);return mk("Trigonometry",2,`Find the value of ${q}`,a,"Recall the table of standard angles.",e,"Mixing up sin 30° and sin 60°.",{w})},
-()=>{const k=ri(1,3),x=ri(0,4),y=ri(0,4);return mk("Coordinate Geometry",3,`Find the distance between (${x}, ${y}) and (${x+3*k}, ${y+4*k})`,5*k,"Use √[(x₂ − x₁)² + (y₂ − y₁)²].",`√(${3*k}² + ${4*k}²) = √${25*k*k} = ${5*k}.`,"Adding the differences instead of squaring.",{w:[7*k,12*k,k]})},
-()=>{const r1=ri(2,6),b=ri(r1+1,9);return mk("Probability",2,`A bag has ${r1} red and ${b} blue balls. What is the probability of picking a red ball?`,`${r1}/${r1+b}`,"Probability = favourable ÷ total.",`Red balls = ${r1}, total = ${r1+b}, so P = ${r1}/${r1+b}.`,"Dividing by the other colour.",{w:[`${b}/${r1+b}`,`${r1}/${b}`,`${r1+b}/${r1}`]})}]};
-const out=[],seen=new Set();for(let k=0;k<80&&out.length<12;k++){const x=G[g][k%6]();if(!seen.has(x.q)){seen.add(x.q);out.push(x)}}
-return out.map((x,i)=>({...x,id:g+"-"+i}))}
-GR.forEach(g=>Q[g]=R[g]?R[g].map((a,i)=>({id:g+"-"+i,t:a[0],d:a[1],q:a[2],o:a[3],a:a[4],h:a[5],e:a[6],m:a[7]})):build(g));
-// After deploying: paste your GitHub Pages URL and your Apps Script web-app URL below
-const SITE_URL="https://husssakba3.github.io/eduquest-poc/",FEEDBACK_URL="https://script.google.com/macros/s/AKfycbypm6urJRt_f3bY9UlK0s0n1U03TPr9ONGF4K5yCsWF9JF49E9Ttj0iAyf9pA80X_ou6Q/exec",TRIAL=8,CAP=5,$=s=>document.querySelector(s);
-const LV=[[0,"Seedling"],[50,"Sprout"],[120,"Scholar"],[220,"Expert"],[350,"Champion"]];
-let S,cache={},st={db:0,claude:0,hit:0};
-function fresh(){S={g:null,seen:Object.fromEntries(GR.map(g=>[g,[]])),u:Object.fromEntries(GR.map(g=>[g,0])),unl:{},xp:0,streak:0,r:2,tok:3,ok:0,n:0,dx:0,cur:null,ans:0,hint:0,weak:{}}}
-const lvl=()=>LV.filter(l=>S.xp>=l[0]).pop()[1];
-const band=()=>S.r<1.5?"Beginner":S.r<2.2?"Developing":S.r<2.8?"Proficient":"Advanced";
-function bar(){
-$("#bar").innerHTML=`<span>⭐ ${S.xp} XP · ${lvl()}</span><span>🔥 ${S.streak}</span><span>💡 ${S.tok} hints</span><span>📈 ${band()}</span>`;
-const nv=(st.db+st.hit+st.claude)*.004,ac=st.claude*.004;
-$("#bts").innerHTML=`<table><tr><td>Served from database</td><td><b>${st.db}</b> (questions, hints, explanations)</td></tr><tr><td>Deep Explain cache hits</td><td><b class=hit>${st.hit}</b> · $0.00</td></tr><tr><td>Claude calls at student time</td><td><b class=miss>${st.claude}</b> (cache misses only)</td></tr><tr><td>Cost if every view called AI</td><td>≈ $${nv.toFixed(3)}</td></tr><tr><td>Actual AI cost</td><td>≈ $${ac.toFixed(3)}</td></tr></table><p class=mu>Tip: tap “Explain more” on a question, then press “New student” and get the same question again. The second student gets it from cache instantly. Costs are illustrative.</p>`}
-function reset(){fresh();home()}
-function home(){S.g=null;bar();const sh=SITE_URL||location.href.split("#")[0];
-$("#m").innerHTML=`<h2>Pick your grade</h2><p class=mu>CBSE · Mathematics · adaptive practice</p><div class=gr>`+GR.map(g=>`<button class="card" onclick="start(${g})"><b>Grade ${g}</b><small>${g==1?"Free forever":S.unl[g]?"✅ Unlocked":"Free trial · "+TRIAL+" Qs"}</small></button>`).join("")+`</div><p class=mu>Model shown: free trial → subject unlock (₹79) → every answer, hint and explanation is stored once and served from the database.</p><a class="card" style="text-decoration:none;text-align:center;background:#25D366;color:#fff;border:0;font-weight:800" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent("Try this maths practice demo (CBSE Grades 1–10): "+sh)}">💬 Share on WhatsApp</a><button class="card" onclick="fb()">✍️ Send feedback</button>`}
-function start(g){S.g=g;next()}
-function next(){const g=S.g;
-if(!S.unl[g]&&g!=1&&S.u[g]>=TRIAL)return paywall();
-const pool=Q[g].filter(q=>!S.seen[g].includes(q.id));if(!pool.length)return result();
-const tg=Math.max(1,Math.min(3,Math.round(S.r)));
-pool.sort((a,b)=>Math.abs(a.d-tg)+Math.random()*.6-Math.abs(b.d-tg)-Math.random()*.6);
-S.cur=pool[0];S.ans=0;S.hint=0;S.seen[g].push(S.cur.id);S.u[g]++;st.db++;bar();
-const q=S.cur;
-$("#m").innerHTML=`<div class=q><span class=tag>${q.t}</span> <span class=tag>Level ${q.d}</span>
-<p class=mu>${S.unl[g]||g==1?"Question "+S.seen[g].length+" of "+Q[g].length:"Free trial "+S.u[g]+" / "+TRIAL}</p><h3>${q.q}</h3>
-${q.o.map((o,i)=>`<button class=o id=o${i} onclick="ans(${i})">${o}</button>`).join("")}
-<div id=hn></div><div id=fb></div></div><div class=row id=ac><button class=g onclick="hint()">💡 Hint (1 token)</button><button class=g onclick="home()">Exit</button></div>`}
-function hint(){if(S.ans||S.hint)return;if(S.tok<1){$("#hn").innerHTML=`<div class=fb>No hint tokens left. Earn them with 5-answer streaks.</div>`;return}
-S.tok--;S.hint=1;st.db++;bar();$("#hn").innerHTML=`<div class=fb>💡 ${S.cur.h} <span class=mu>(XP halved)</span></div>`}
-function ans(i){if(S.ans)return;S.ans=1;const q=S.cur,ok=i==q.a;S.n++;st.db++;
-$("#o"+q.a).classList.add("ok");if(!ok)$("#o"+i).classList.add("no");
-if(ok){S.ok++;S.streak++;S.r+=.35;S.xp+=Math.round(10*q.d/(S.hint?2:1));if(S.streak%5==0)S.tok++}
-else{S.streak=0;S.r=Math.max(.5,S.r-.5);S.weak[q.t]=(S.weak[q.t]||0)+1}
-bar();
-$("#fb").innerHTML=ok?`<div class=fb>🎉 Correct! +${Math.round(10*q.d/(S.hint?2:1))} XP<details><summary>Show explanation</summary>${q.e}</details></div>`:`<div class=fb>❌ Not quite. <b>Explanation:</b> ${q.e}</div>`;
-$("#ac").innerHTML=`<button class=g onclick="deep()">🧠 Explain more (${S.dx}/${CAP})</button><button onclick="next()">Next →</button>`}
-function deep(){const q=S.cur,k=q.id;
-if(S.dx>=CAP){$("#fb").innerHTML+=`<div class=fb>You have used all ${CAP} AI explanations for today. Come back tomorrow!</div>`;return}
-S.dx++;const show=(tag)=>{$("#fb").innerHTML+=`<div class=fb><b>AI Explanation</b> · ${tag}<br>Let's go step by step. ${q.e}<br><br>⚠️ Common slip: ${q.m}</div>`;bar();$("#ac").firstChild.textContent=`🧠 Explain more (${S.dx}/${CAP})`};
-if(cache[k]){cache[k]++;st.hit++;show(`<span class=hit>⚡ cache HIT · $0.00 · instant</span>`)}
-else{$("#fb").innerHTML+=`<div class=fb id=sp>Asking Claude Sonnet…</div>`;setTimeout(()=>{$("#sp").remove();cache[k]=1;st.claude++;show(`<span class=miss>🧠 cache MISS · Claude called once, now stored for everyone (simulated)</span>`)},900)}}
-function paywall(){const g=S.g;bar();$("#m").innerHTML=`<div class=q><h3>You've explored Grade ${g} Maths 🎯</h3><p>Unlock it forever for <b>₹79</b>. One-time, no subscription.</p>
-<p class=mu>Product ID: eduquest_in_g${g}_math_unlock<br>Also available: Core 3 Pack ₹179 · Full Grade ₹249 · Annual All-Access ₹999/yr</p>
-<div class=row><button onclick="S.unl[${g}]=1;next()">Unlock (simulated purchase)</button><button class=g onclick="home()">Not now</button></div></div>`}
-function result(){const w=Object.entries(S.weak).sort((a,b)=>b[1]-a[1]).map(x=>x[0]).slice(0,3);
-$("#m").innerHTML=`<div class=q><h3>Session complete 🏆</h3><p>Score: <b>${S.ok} / ${S.n}</b> · XP <b>${S.xp}</b> · ${lvl()}<br>Skill level: <b>${band()}</b></p><p>${w.length?"Practise next: <b>"+w.join(", ")+"</b>":"No weak topics. Great work!"}</p>
-<div class=row><button onclick="S.seen[S.g]=[];next()">Practise again</button><button class=g onclick="home()">Grades</button></div></div>`}
-let rate=0;
-const LS={get(){try{return JSON.parse(localStorage.getItem("eq_fb")||"[]")}catch(e){return[]}},add(x){try{const a=LS.get();a.unshift(x);localStorage.setItem("eq_fb",JSON.stringify(a.slice(0,50)))}catch(e){}}};
-const esc=t=>String(t??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-function fb(){rate=0;$("#m").innerHTML=`<h2>Your feedback</h2><p class=mu>Tell us what you liked or what to fix. Please don't enter personal details.</p><div class=em>${["😞","😐","🙂","😍"].map((e,i)=>`<button id=r${i+1} onclick="rt(${i+1})" aria-label="Rating ${i+1} of 4">${e}</button>`).join("")}</div><textarea id=ft maxlength=1000 placeholder="Your comment…"></textarea><input id=fn maxlength=60 placeholder="Name (optional)"><div class=row><button onclick="sendFb()">Send</button><button class=g onclick="home()">Cancel</button></div><div id=fs></div>`}
-function rt(n){rate=n;for(let i=1;i<5;i++)$("#r"+i).classList.toggle("on",i==n)}
-async function sendFb(){const msg=$("#ft").value.trim();if(!msg&&!rate){$("#fs").innerHTML=`<div class=fb>Add a rating or a comment first.</div>`;return}
-const x={ts:new Date().toISOString(),name:$("#fn").value.trim(),rating:rate,msg,grade:S.g||""};LS.add(x);let ok=false;
-if(FEEDBACK_URL){try{await fetch(FEEDBACK_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(x)});ok=true}catch(e){}}
-$("#m").innerHTML=`<div class=q><h3>Thank you! 💙</h3><p>${ok?"Your feedback was sent.":"Saved on this device. (Feedback collection is not connected yet.)"}</p><button onclick="home()">Back to grades</button></div>`}
-function admin(){$("#m").innerHTML=`<h2>Feedback inbox</h2>${FEEDBACK_URL?`<input id=ap type=password placeholder="Admin passcode"><button onclick="loadFb()">View all feedback</button>`:`<p class=mu>Backend not connected. Showing comments saved on this device only.</p>`}<div id=al></div>`;if(!FEEDBACK_URL)showFb(LS.get())}
-async function loadFb(){$("#al").innerHTML="Loading…";try{const r=await fetch(FEEDBACK_URL+"?key="+encodeURIComponent($("#ap").value));showFb(await r.json())}catch(e){$("#al").innerHTML="Could not load. Check the URL and passcode."}}
-function showFb(a){$("#al").innerHTML=a.length?a.map(x=>`<div class=fb><b>${["","😞","😐","🙂","😍"][x.rating]||""} ${esc(x.name)||"Anonymous"}</b> <span class=mu>${esc(String(x.ts).slice(0,16).replace("T"," "))}${x.grade?" · Grade "+esc(x.grade):""}</span><br>${esc(x.msg)}</div>`).join(""):`<p class=mu>No feedback yet.</p>`}
-addEventListener("hashchange",()=>{if(location.hash=="#admin")admin()});
-reset();if(location.hash=="#admin")admin();
+add:(r,n,L)=>{const m=Math.ceil(M[n]*L/3),a=r(1,m),b=r(1,m);return[`${a} + ${b} = ?`,a+b,`Add the ones first, then the tens${n>3?' and hundreds':''}. ${a} + ${b} = ${a+b}.`,`Split ${b} into tens and ones.`]},
+sub:(r,n,L)=>{const m=Math.ceil(M[n]*L/3),a=r(Math.max(2,m>>1),Math.max(3,m)),b=r(1,a-1);return[`${a} − ${b} = ?`,a-b,`Take ${b} away from ${a}: ${a} − ${b} = ${a-b}.`,`Check: answer + ${b} should make ${a}.`]},
+mul:(r,n,L)=>{const a=n<3?r(1,10):n<4?r(2,9):n<6?r(11,10+7*L):r(12,99),b=n<3?r(2,3):n<4?r(2,9):n<6?r(3,9):r(11,25);return[`${a} × ${b} = ?`,a*b,`${b} groups of ${a} make ${a*b}.`,`Try ${b} × ${a} instead.`]},
+div:(r,n)=>{const b=r(2,n<3?5:12),c=r(n<3?1:2,n<3?5:10+3*n),a=b*c;return[`${a} ÷ ${b} = ?`,c,`${b} × ${c} = ${a}, so ${a} ÷ ${b} = ${c}.`,`Which number times ${b} gives ${a}?`]},
+fr:(r,n)=>{const d=[2,4,3,5,10][r(0,n<3?1:4)],k=r(1,d-1),t=d*r(1,n<3?5:12);return[`${k}/${d} of ${t} = ?`,t/d*k,`Split ${t} into ${d} equal parts: ${t/d} each. Take ${k} of them: ${t/d*k}.`,`First find 1/${d} of ${t}.`]},
+pc:r=>{const p=[10,20,25,50,5,40,75][r(0,6)],t=100*r(1,12);return[`${p}% of ${t} = ?`,p*t/100,`${p}% = ${p}/100, so ${p}/100 × ${t} = ${p*t/100}.`,`Find 1% first: ${t/100}.`]},
+per:(r,n)=>{const l=r(2,5+3*n),w=r(2,5+3*n);return[`A rectangle is ${l} cm long and ${w} cm wide. Its perimeter (cm)?`,2*(l+w),`Perimeter = 2 × (l + w) = 2 × ${l+w} = ${2*(l+w)}.`,`Add all four sides.`]},
+area:(r,n)=>{const l=r(2,5+3*n),w=r(2,5+3*n);return[`A rectangle is ${l} cm by ${w} cm. Its area (cm²)?`,l*w,`Area = length × width = ${l} × ${w} = ${l*w}.`,`Multiply length by width.`]},
+ang:r=>{const a=r(30,90),b=r(30,80);return[`Two angles of a triangle are ${a}° and ${b}°. The third angle (degrees)?`,180-a-b,`Angles of a triangle add up to 180°: 180 − ${a} − ${b} = ${180-a-b}.`,`The three angles total 180°.`]},
+lin:(r,n)=>{const ng=n>=7,x=ng?r(-8,12):r(2,12),a=r(2,9),b=ng?(r(0,1)?1:-1)*r(1,9):r(1,20),c=a*x+b;return[`Solve: ${a}x ${sg(b)} = ${c}. x = ?`,x,`Move ${b} across: ${a}x = ${c-b}, so x = ${c-b} ÷ ${a} = ${x}.`,`First get ${a}x alone.`]},
+sq:r=>{const v=r(2,25);return r(0,1)?[`√${v*v} = ?`,v,`${v} × ${v} = ${v*v}, so √${v*v} = ${v}.`,`Which number multiplied by itself gives ${v*v}?`]:[`${v}² = ?`,v*v,`${v}² = ${v} × ${v} = ${v*v}.`,`Multiply ${v} by itself.`]},
+mean:r=>{const m=r(50,90),d=[r(-9,9),r(-9,9),r(-9,9),r(-9,9)];d.push(-d.reduce((s,x)=>s+x,0));return[`Mean of ${d.map(x=>m+x).join(', ')}?`,m,`Sum = ${5*m}; mean = ${5*m} ÷ 5 = ${m}.`,`Add all, divide by 5.`]},
+med:r=>{const a=Array.from({length:5},()=>r(3,60)),s=a.slice().sort((x,y)=>x-y);return[`Median of ${a.join(', ')}?`,s[2],`Sorted: ${s.join(', ')}. The middle value is ${s[2]}.`,`Sort the numbers first.`]},
+ratio:r=>{let a,b;do{a=r(1,5);b=r(1,5)}while(a==b);const k=r(2,12);return[`Share Rs ${(a+b)*k} in the ratio ${a}:${b}. The bigger share (Rs)?`,Math.max(a,b)*k,`Total parts = ${a+b}; one part = ${k}. Bigger share = ${Math.max(a,b)} × ${k}.`,`Find the value of one part.`]},
+pro:r=>{const p=[10,20,25,50][r(0,3)],c=100*r(1,10);return[`Cost price Rs ${c}, profit ${p}%. Selling price (Rs)?`,c+c*p/100,`Profit = ${p}% of ${c} = ${c*p/100}. SP = ${c} + ${c*p/100}.`,`SP = CP + profit.`]},
+si:r=>{const p=1000*r(1,10),R=r(2,10),t=r(1,5);return[`Simple interest on Rs ${p} at ${R}% per year for ${t} year${t>1?'s':''} (Rs)?`,p*R*t/100,`SI = P×R×T/100 = ${p}×${R}×${t}/100 = ${p*R*t/100}.`,`Use SI = PRT/100.`]},
+pyth:r=>{const t=TRI[r(0,4)],k=r(1,3);return[`Legs of a right triangle are ${t[0]*k} cm and ${t[1]*k} cm. Hypotenuse (cm)?`,t[2]*k,`c² = ${t[0]*k}² + ${t[1]*k}² = ${(t[2]*k)**2}, so c = ${t[2]*k}.`,`Use a² + b² = c².`]},
+dist:r=>{const t=TRI[r(0,4)],k=r(1,3),p=r(-5,5),q=r(-5,5);return[`Distance between (${p}, ${q}) and (${p+t[0]*k}, ${q+t[1]*k})?`,t[2]*k,`Differences are ${t[0]*k} and ${t[1]*k}; √(${(t[0]*k)**2} + ${(t[1]*k)**2}) = ${t[2]*k}.`,`Use the distance formula.`]},
+mid:r=>{const x=r(-8,8),X=x+2*r(1,8),y=r(-8,8),Y=y+2*r(1,8);return[`Midpoint of (${x}, ${y}) and (${X}, ${Y}): x-coordinate?`,(x+X)/2,`(${x} + ${P(X)}) ÷ 2 = ${(x+X)/2}.`,`Average the two x-values.`]},
+quad:r=>{let p,q;do{p=r(-6,9);q=r(-6,9)}while(p==q);return[`Larger root of x² ${sg(-(p+q))}x ${sg(p*q)} = 0?`,Math.max(p,q),`Factorise: (x ${sg(-p)})(x ${sg(-q)}) = 0, so the roots are ${p} and ${q}.`,`Find two numbers with sum ${p+q} and product ${p*q}.`]},
+ap:r=>{const a=r(1,20),d=r(2,9),k=r(8,25);return[`AP: ${a}, ${a+d}, ${a+2*d}, … Find the ${k}th term.`,a+(k-1)*d,`aₙ = a + (n−1)d = ${a} + ${k-1}×${d} = ${a+(k-1)*d}.`,`The common difference is ${d}.`]},
+circ:r=>{const k=r(1,5);return r(0,1)?[`Take π = 22/7. Area of a circle of radius ${7*k} cm (cm²)?`,154*k*k,`πr² = 22/7 × ${7*k}² = ${154*k*k}.`,`Use πr².`]:[`Take π = 22/7. Circumference of a circle of radius ${7*k} cm (cm)?`,44*k,`2πr = 2 × 22/7 × ${7*k} = ${44*k}.`,`Use 2πr.`]},
+vol:r=>{const l=r(2,12),w=r(2,12),h=r(2,12);return[`Volume (cm³) of a cuboid ${l} × ${w} × ${h} cm?`,l*w*h,`V = l × w × h = ${l*w*h}.`,`Multiply the three sides.`]},
+cube:r=>{const s=r(2,12);return r(0,1)?[`Surface area (cm²) of a cube of side ${s} cm?`,6*s*s,`6 faces × ${s}² = ${6*s*s}.`,`A cube has 6 equal square faces.`]:[`Volume (cm³) of a cube of side ${s} cm?`,s**3,`${s} × ${s} × ${s} = ${s**3}.`,`Multiply the side three times.`]},
+tri:r=>{const b=2*r(2,15),h=r(3,20);return[`Area (cm²) of a triangle with base ${b} cm and height ${h} cm?`,b*h/2,`½ × ${b} × ${h} = ${b*h/2}.`,`Area = ½ × base × height.`]},
+prob:r=>{const T=[10,20,25,50][r(0,3)],R=r(1,T-1);return[`A bag has ${R} red and ${T-R} blue balls. Chance of picking red (in %)?`,R*100/T,`${R}/${T} × 100 = ${R*100/T}%.`,`Probability = favourable ÷ total.`]},
+lcm:r=>{let a,b;do{a=r(2,12);b=r(2,12)}while(a==b);return[`LCM of ${a} and ${b}?`,a*b/gcd(a,b),`HCF = ${gcd(a,b)}, so LCM = ${a}×${b} ÷ ${gcd(a,b)} = ${a*b/gcd(a,b)}.`,`List multiples of the bigger number.`]},
+hcf:r=>{const g=r(2,9),p=[[2,3],[3,4],[2,5],[3,5],[4,5],[5,6]][r(0,5)];return[`HCF of ${g*p[0]} and ${g*p[1]}?`,g,`${g*p[0]} = ${g}×${p[0]} and ${g*p[1]} = ${g}×${p[1]}; the common factor is ${g}.`,`Which biggest number divides both?`]},
+prime:r=>{const p=[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47][r(0,14)];return['Which of these is a prime number?',p,`${p} has only two factors: 1 and itself.`,`A prime has no other factors.`,[4,6,8,9,10,12,14,15,16,18,21,25,27,33,35,39,45,49,51,55,57,63,77,91]]},
+int:r=>{const a=r(-20,20),b=r(-20,20),p=r(0,1);return[`${a} ${p?'+':'−'} ${P(b)} = ?`,p?a+b:a-b,`${p?'Adding':'Subtracting'} ${P(b)} to ${a} gives ${p?a+b:a-b}.`,`Use a number line.`]},
+place:(r,n)=>{const k=n<3?1:n<4?2:3;let N,o,d;do{N=r(10**k,10**(k+1)-1);o=r(0,k);d=Math.floor(N/10**o)%10}while(!d);return[`In ${N}, the digit in the ${PL[o]} place stands for what value?`,d*10**o,`The digit ${d} is in the ${PL[o]} place, so it is worth ${d*10**o}.`,`Count places from the right.`]},
+time:r=>{const h=r(1,5),m=[10,15,20,30,45][r(0,4)];return[`${h} hour${h>1?'s':''} ${m} minutes = how many minutes?`,60*h+m,`${h} × 60 = ${60*h}; plus ${m} = ${60*h+m}.`,`1 hour = 60 minutes.`]},
+money:r=>{const a=r(2,9),b=r(2,12),c=Math.ceil((a*b+1)/10)*10;return[`Ravi buys ${a} pencils at Rs ${b} each and pays Rs ${c}. Change (Rs)?`,c-a*b,`Cost = ${a}×${b} = ${a*b}. Change = ${c} − ${a*b} = ${c-a*b}.`,`Find the total cost first.`]},
+pat:(r,n)=>{const a=r(1,n<2?5:20),d=r(n<2?1:2,n<2?3:9);return[`${a}, ${a+d}, ${a+2*d}, ${a+3*d}, ?`,a+4*d,`The numbers go up by ${d} each time, so next is ${a+4*d}.`,`Find the jump between numbers.`]},
+trig:(r,n,L,i)=>{const t=TR[i%10];return[`${t[0]} = ?`,t[1],`Standard value: ${t[0]} = ${t[1]}.`,`Recall the table of standard angles.`,['0','1/2','√3/2','1','1/√3'].filter(x=>x!=t[1])]},
+exp:r=>{const a=r(2,9),b=r(2,9),s=r(2,5);return r(0,1)?[`${s}^${a+b} ÷ ${s}^${b} = ${s}^?`,a,`Same base: subtract the powers, ${a+b} − ${b} = ${a}.`,`Subtract the powers.`]:[`${s}^${a} × ${s}^${b} = ${s}^?`,a+b,`Same base: add the powers, ${a} + ${b} = ${a+b}.`,`Add the powers.`]},
+ev:(r,n)=>{const x=r(2,9),a=r(n>=9?1:2,n>=9?5:9),b=r(1,15);return n>=9?[`Value of ${a}x² ${sg(b)} when x = ${x}?`,a*x*x+b,`${a}×${x}² + ${b} = ${a*x*x+b}.`,`Square x first.`]:[`If x = ${x}, the value of ${a}x ${sg(b)} is?`,a*x+b,`${a}×${x} + ${b} = ${a*x+b}.`,`Put ${x} in place of x.`]},
+dec:r=>{const a=r(1,99),b=r(1,99);return[`${(a/10).toFixed(1)} + ${(b/10).toFixed(1)} = ?`,((a+b)/10).toFixed(1),`Line up the decimal points: ${((a+b)/10).toFixed(1)}.`,`Add tenths like whole numbers.`,0.1]}
+};
+const CH={1:['Addition|add','Subtraction|sub','Patterns|pat','Money|money','Time|time','Halves & Quarters|fr','Place value|place','Doubling|mul','Sharing|div','Perimeter fun|per'],
+2:['Addition|add','Subtraction|sub','Multiplication tables|mul','Division|div','Place value|place','Money|money','Time|time','Patterns|pat','Fractions|fr','Perimeter|per'],
+3:['Addition|add','Subtraction|sub','Multiplication|mul','Division|div','Fractions|fr','Place value|place','Money|money','Time|time','Perimeter|per','Area|area'],
+4:['Large numbers|place','Addition|add','Subtraction|sub','Multiplication|mul','Division|div','Fractions|fr','Decimals|dec','Perimeter & Area|area','Factors (HCF)|hcf','Patterns|pat'],
+5:['Place value|place','Multiplication|mul','Division|div','Fractions|fr','Decimals|dec','Percentages|pc','LCM|lcm','Perimeter|per','Area|area','Volume|vol'],
+6:['Integers|int','Prime numbers|prime','HCF|hcf','LCM|lcm','Fractions|fr','Decimals|dec','Ratio|ratio','Percentage|pc','Algebra|ev','Angles|ang'],
+7:['Integers|int','Fractions|fr','Decimals|dec','Equations|lin','Ratio|ratio','Percentage|pc','Triangle angles|ang','Triangle area|tri','Exponents|exp','Mean|mean'],
+8:['Squares & roots|sq','Cubes|cube','Linear equations|lin','Profit & loss|pro','Simple interest|si','Ratio|ratio','Mean & median|med','Exponents|exp','Probability|prob','Volume|vol'],
+9:['Number systems|sq','Polynomials|ev','Coordinate geometry|mid','Triangles|ang','Circles|circ','Linear equations|lin','Statistics|med','Probability|prob','Surface area & volume|cube','Pythagoras|pyth'],
+10:['Real numbers|hcf','Polynomials|ev','Quadratic equations|quad','Arithmetic progressions|ap','Trigonometry|trig','Coordinate geometry|dist','Circles|circ','Probability|prob','Statistics|mean','Pythagoras|pyth']};
+function mk(r,ans,x){const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=r(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};let w,A;
+if(Array.isArray(x)){A=String(ans);w=sh(x.map(String)).slice(0,3)}else{const s=x||1,f=v=>s<1?v.toFixed(1):String(v);ans=+ans;A=f(ans);w=sh([1,-1,2,-2,3,-3,10,-10].map(d=>ans+d*s).filter(v=>ans<0||v>=0)).slice(0,3).map(f)}
+const o=sh([A,...w]);return[o,o.indexOf(A)]}
+const B={};
+function bank(g){if(B[g])return B[g];const o=[];CH[g].forEach((c,ci)=>{const[nm,t]=c.split('|'),seen=new Set();for(let i=0;i<10;i++){const L=i<3?1:i<7?2:3;let x,r,k=0;do{r=rng(g*9973+ci*131+i*17+k*7919+1);x=G[t](r,g,L,i);k++}while(seen.has(x[0])&&k<40);seen.add(x[0]);const[opts,a]=mk(r,x[1],x[4]);o.push({id:g+'-'+ci+'-'+i,g,ci,nm,L,q:x[0],o:opts,a,e:x[2],h:x[3]})}});return B[g]=o}
+const D=()=>({xp:0,tok:10,st:0,day:'',p:{},v:{},h:{},dd:{d:'',n:0},unl:{},rt:{},cor:0});
+let S=Object.assign(D(),JSON.parse(ls.g('eq2')||'{}')),C=JSON.parse(ls.g('eqc')||'{}'),T={r:0,h:0,c:0},cur=null,rate=0;
+const sv=()=>ls.s('eq2',JSON.stringify(S)),today=()=>new Date().toISOString().slice(0,10),done=l=>l.filter(q=>S.p[q.id]).length,app=$('#app'),LV=['','Beginner','Intermediate','Advanced'];
+const btx=()=>`📖 DB reads ${T.r} · ⚡ cache hits ${T.h} · 🤖 Claude calls ${T.c}`;
+const bts=()=>`<details class=bt><summary>🔍 Behind the scenes</summary><p id=bt>${btx()}</p></details>`;
+function bar(){$('#bar').innerHTML=`<div class=hb><b onclick=home()>🎓 EduQuest</b><span>⭐ ${S.xp} · Lv ${Math.floor(S.xp/100)+1}</span><span>🔥 ${S.st}</span><span>🪙 ${S.tok}</span></div>`}
+function trk(L,i){const n=L.length,d=done(L),pc=Math.round(d/n*100),fl=[[25,'🌱'],[50,'🌿'],[75,'🌳'],[100,'🏆']];let s=Math.max(0,Math.min(i-5,n-12)),dots='';
+if(i>=0)for(let j=s;j<Math.min(n,s+12);j++){const p=S.p[L[j].id];dots+=`<b class="dt ${j==i?'cur':''} ${p?(p.ok?'ok':'bad'):S.v[L[j].id]&&j!=i?'sk':''}" onclick="jump(${j})">${j+1}</b>`}
+return`<div class=trk><div class=lane><div class=fill style="width:${pc}%"></div>${fl.map(([k,e])=>`<span class="fl ${pc>=k?'on':''}" style="left:${k}%">${e}</span>`).join('')}<span class=hero style="left:${pc}%">🪁</span></div><div class=cap>${d}/${n} done · ${pc}%${pc==100?' · 🎉 Complete!':''}</div>${dots?`<div class=dots>${dots}</div>`:''}</div>`}
+function home(){cur=null;bar();location.hash='';app.innerHTML=`<h2>Pick your class</h2><div class=grid>${[1,2,3,4,5,6,7,8,9,10].map(g=>{const d=done(bank(g));return`<button class=gb onclick="grade(${g})"><b>${g}</b><small>${d}/100</small><i style="width:${d}%"></i></button>`}).join('')}</div><div class=row><a class=btn target=_blank href="https://wa.me/?text=${encodeURIComponent('Try EduQuest – free CBSE maths practice for kids: '+(SITE_URL||location.href.split('#')[0]))}">📲 Share on WhatsApp</a><button onclick=fb()>💬 Feedback</button><button onclick=nw()>🆕 New student</button></div>${bts()}`}
+function grade(g,m='c',f=-1){cur=null;bar();const b=bank(g),ch=CH[g].map(c=>c.split('|')[0]);
+let h=`<button class=link onclick=home()>‹ All classes</button><h2>Class ${g} · CBSE Maths</h2>${trk(b,-1)}<div class=tabs>${[['c','🌱 Chapters'],['a','📚 All questions'],['s','⚡ Smart mix']].map(([k,t])=>`<button class="${m==k?'on':''}" onclick="grade(${g},'${k}')">${t}</button>`).join('')}</div>`;
+if(m=='c')h+=`<div class=grid2>${ch.map((n,i)=>{const dn=done(b.filter(q=>q.ci==i));return`<button class=cc onclick="play(${g},'c',${i})"><span class=pl>${dn==10?'🌳':dn>4?'🌿':dn?'🌱':'🫘'}</span><b>${n}</b><small>${dn}/10 done</small></button>`}).join('')}</div>`;
+if(m=='a'){h+=`<div class=chips><button class="${f<0?'on':''}" onclick="grade(${g},'a',-1)">All</button>${ch.map((n,i)=>`<button class="${f==i?'on':''}" onclick="grade(${g},'a',${i})">${n}</button>`).join('')}</div>`;
+h+=b.filter(q=>f<0||q.ci==f).map((q,i)=>{const p=S.p[q.id];return`<div class=row2 onclick="play(${g},'a',${f},${i})">${p?(p.ok?'✅':'❌'):S.v[q.id]?'⏭️':'⚪'}<span>${i+1}. ${q.q}</span><em>${q.nm}</em></div>`}).join('')}
+if(m=='s')h+=`<div class=card><h3>⚡ Smart mix</h3><p>Questions from every chapter, matched to your level (now: <b>${LV[Math.round(S.rt[g]||1)]}</b>). Unanswered ones come first.</p><button class="btn pri" onclick="play(${g},'s',-1)">Start</button></div>`;
+app.innerHTML=h+bts()}
+function play(g,m,f,i=0){const b=bank(g);let L,t;
+if(m=='c'){L=b.filter(q=>q.ci==f);t=L[0].nm;const n=L.findIndex(q=>!S.p[q.id]);if(i==0&&n>0)i=n}
+else if(m=='a'){L=b.filter(q=>f<0||q.ci==f);t=f<0?'All questions':L[0].nm}
+else{const rt=S.rt[g]||1;L=b.map(q=>[q,Math.random()]).sort((x,y)=>x[1]-y[1]).map(x=>x[0]).sort((x,y)=>(!!S.p[x.id]-!!S.p[y.id])||Math.abs(x.L-rt)-Math.abs(y.L-rt));t='Smart mix'}
+cur={g,m,f,L,i,t};show(1)}
+const fxh=q=>{const p=S.p[q.id];let h='';if(S.h[q.id])h+=`<div class=hint>💡 ${q.h}</div>`;if(p)h+=`<div class="ex ${p.ok?'g':'r'}">${p.ok?`✅ Correct! +${p.x} XP`:`❌ Not quite. Answer: <b>${q.o[q.a]}</b>`}<br>${q.e}<br><button onclick=deep()>🧠 Deep Explain</button><div id=dp></div></div>`;return h};
+function show(rd){const{g,L,i}=cur,q=L[i];if(rd){T.r++;S.v[q.id]=1}sv();bar();
+if(g!=1&&!S.unl[g]&&!S.p[q.id]&&done(bank(g))>=FREE){app.innerHTML=`<button class=link onclick="grade(${g})">‹ Back</button><div class=card><h3>🔒 Free trial finished</h3><p>Unlock Class ${g} maths for Rs 79 (simulated · product <code>eduquest_in_g${g}_math_unlock</code>).</p><button class="btn pri" onclick="S.unl[${g}]=1;show(0)">Unlock (demo)</button></div>`;return}
+const p=S.p[q.id];
+app.innerHTML=`<button class=link onclick="grade(${g},'${cur.m}',${cur.f})">‹ Class ${g} · ${cur.t}</button>${trk(L,i)}<div class=card><div class=tag>${q.nm} · ${LV[q.L]}</div><h3>${q.q}</h3>${q.o.map((o,j)=>`<button class="op ${p?(j==q.a?'ok':j==p.c?'bad':''):''}" ${p?'disabled':''} onclick="ans(${j})">${o}</button>`).join('')}<div>${fxh(q)}</div>${p||S.h[q.id]?'':`<button onclick=hint()>💡 Hint (1 token)</button>`}</div><div class=nav><button ${i?'':'disabled'} onclick="mv(-1)">◀ Back</button><span>${i+1} / ${L.length}</span><button class=pri onclick="mv(1)">${p?'Next ▶':'Skip ▶'}</button></div>${bts()}`}
+function ans(j){const q=cur.L[cur.i];if(S.p[q.id])return;const ok=j==q.a,x=ok?(10*q.L)>>(S.h[q.id]?1:0):0,t=today();
+if(S.day!=t){S.st=S.day==new Date(Date.now()-864e5).toISOString().slice(0,10)?S.st+1:1;S.day=t}
+S.p[q.id]={c:j,ok,x};S.xp+=x;if(ok&&++S.cor%5==0)S.tok++;S.rt[q.g]=Math.min(3,Math.max(1,(S.rt[q.g]||1)+(ok?.25:-.25)));show(0)}
+function hint(){const q=cur.L[cur.i];if(S.tok<1)return alert('No hint tokens left. You earn 1 for every 5 correct answers!');S.tok--;S.h[q.id]=1;show(0)}
+function mv(d){const n=cur.i+d;if(n<0)return;if(n>=cur.L.length)return finish();cur.i=n;show(1)}
+function jump(j){cur.i=j;show(1)}
+function finish(){const{g,L,m,f,t}=cur;app.innerHTML=`<div class=card><h3>🎉 ${t} finished</h3><p>${L.filter(q=>S.p[q.id]&&S.p[q.id].ok).length} correct · ${done(L)} answered · ${L.length} total.</p><button class="btn pri" onclick="grade(${g},'${m}',${f})">Back to Class ${g}</button></div>`}
+function deep(){const q=cur.L[cur.i];if(S.dd.d!=today())S.dd={d:today(),n:0};const e=$('#dp');
+if(S.dd.n>=5){e.textContent='Daily limit of 5 Deep Explains reached. Try again tomorrow!';return}
+S.dd.n++;const hit=C[q.id];hit?T.h++:T.c++;C[q.id]=1;ls.s('eqc',JSON.stringify(C));sv();
+const t=()=>{e.innerHTML=`<i>${hit?'⚡ served from cache (free)':'🤖 fresh Claude answer, now cached for everyone'}</i><br>Step by step: ${q.e}`;$('#bt').textContent=btx()};
+hit?t():(e.textContent='Thinking…',setTimeout(t,700))}
+function fb(){const m=document.createElement('div');m.className='ov';m.id='ov';rate=0;m.innerHTML=`<div class=card><h3>Send feedback</h3><div class=emo>${['😞','😐','🙂','😍'].map((e,i)=>`<button onclick="rate=${i+1};this.parentNode.querySelectorAll('button').forEach(b=>b.className='');this.className='on'">${e}</button>`).join('')}</div><textarea id=fc placeholder="What did you like or find confusing?"></textarea><input id=fn placeholder="Name (optional)"><div class=row><button onclick="ov.remove()">Cancel</button><button class="btn pri" onclick=sendFb()>Send</button></div></div>`;document.body.append(m)}
+function sendFb(){const o={t:new Date().toISOString(),rating:rate,comment:fc.value,name:fn.value,grade:cur?cur.g:''},a=JSON.parse(ls.g('eqfb')||'[]');a.push(o);ls.s('eqfb',JSON.stringify(a));
+if(FEEDBACK_URL)fetch(FEEDBACK_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(o)}).catch(()=>{});
+ov.remove();alert(FEEDBACK_URL?'Thank you! 🙏':'Saved on this device. (Set FEEDBACK_URL to collect feedback from friends.)')}
+function admin(){bar();const p=prompt('Admin passcode');if(!p)return home();const sh=a=>app.innerHTML=`<button class=link onclick=home()>‹ Back</button><h2>Feedback (${a.length})</h2>`+a.map(x=>`<div class=card><b>${'★'.repeat(x.rating||0)}</b> ${esc(x.name||'anon')} · Class ${esc(x.grade||'-')}<p>${esc(x.comment||'')}</p><small>${esc(x.t||'')}</small></div>`).join(''),loc=()=>sh(JSON.parse(ls.g('eqfb')||'[]'));
+FEEDBACK_URL?fetch(FEEDBACK_URL+'?pass='+encodeURIComponent(p)).then(r=>r.json()).then(a=>sh(Array.isArray(a)?a:a.rows||[])).catch(loc):loc()}
+function nw(){if(confirm('Start as a new student? Progress resets; the shared cache stays.')){S=D();sv();home()}}
+addEventListener('hashchange',()=>location.hash=='#admin'&&admin());
+location.hash=='#admin'?admin():home();
 </script></body></html>
