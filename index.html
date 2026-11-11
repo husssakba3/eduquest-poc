@@ -95,7 +95,7 @@ let S=Object.assign(D(),JSON.parse(ls.g('eq2')||'{}')),C=JSON.parse(ls.g('eqc')|
 const sv=()=>ls.s('eq2',JSON.stringify(S)),today=()=>new Date().toISOString().slice(0,10),done=l=>l.filter(q=>S.p[q.id]).length,app=$('#app'),LV=['','Beginner','Intermediate','Advanced'];
 const btx=()=>`📖 DB reads ${T.r} · ⚡ cache hits ${T.h} · 🤖 Claude calls ${T.c}`;
 const bts=()=>`<details class=bt><summary>🔍 Behind the scenes</summary><p id=bt>${btx()}</p></details>`;
-function bar(){$('#bar').innerHTML=`<div class=hb><b onclick=home()>🎓 EduQuest</b><span>⭐ ${S.xp} · Lv ${Math.floor(S.xp/100)+1}</span><span>🔥 ${S.st}</span><span>🪙 ${S.tok}</span><button class=fbb onclick=fb() aria-label=Feedback>💬</button></div>`}
+function bar(){$('#bar').innerHTML=`<div class=hb><b onclick=home()>🎓 EduQuest</b><span>⭐ ${S.xp} · Lv ${Math.floor(S.xp/100)+1}</span><span>🔥 ${S.st}</span><span>🪙 ${S.tok}</span><button class=fbb onclick=fb() >💬 Feedback</button></div>`}
 function trk(L,i){const n=L.length,d=done(L),pc=Math.round(d/n*100),fl=[[25,'🌱'],[50,'🌿'],[75,'🌳'],[100,'🏆']];let s=Math.max(0,Math.min(i-5,n-12)),dots='';
 if(i>=0)for(let j=s;j<Math.min(n,s+12);j++){const p=S.p[L[j].id];dots+=`<b class="dt ${j==i?'cur':''} ${p?(p.ok?'ok':'bad'):S.v[L[j].id]&&j!=i?'sk':''}" onclick="jump(${j})">${j+1}</b>`}
 return`<div class=trk><div class=lane><div class=fill style="width:${pc}%"></div>${fl.map(([k,e])=>`<span class="fl ${pc>=k?'on':''}" style="left:${k}%">${e}</span>`).join('')}<span class=hero style="left:${pc}%">🪁</span></div><div class=cap>${d}/${n} done · ${pc}%${pc==100?' · 🎉 Complete!':''}</div>${dots?`<div class=dots>${dots}</div>`:''}</div>`}
@@ -134,7 +134,7 @@ let lg='';const back=()=>cur?show(0):home();
 function fb(){rate=0;app.innerHTML=`<h2>Your feedback</h2><p class=mu>Tell us what you liked or what to fix. Please don't enter personal details.</p><div class=em>${["😞","😐","🙂","😍"].map((e,i)=>`<button id=r${i+1} onclick="rt(${i+1})" aria-label="Rating ${i+1} of 4">${e}</button>`).join("")}</div><textarea id=ft maxlength=1000 placeholder="Your comment…"></textarea><input id=fn maxlength=60 placeholder="Name (optional)"><div class=row><button class="btn pri" onclick="sendFb()">Send</button><button onclick="back()">Cancel</button></div><div id=fs></div>`}
 function rt(n){rate=n;for(let i=1;i<5;i++)$("#r"+i).classList.toggle("on",i==n)}
 async function sendFb(){const msg=$("#ft").value.trim();if(!msg&&!rate){$("#fs").innerHTML=`<div class=fb>Add a rating or a comment first.</div>`;return}
-const x={ts:new Date().toISOString(),name:$("#fn").value.trim(),rating:rate,msg,grade:lg||""};LS.add(x);let ok=false;
+const ts=new Date().toISOString(),x={ts,t:ts,name:$("#fn").value.trim(),rating:rate,msg,comment:msg,grade:String(lg||"")};LS.add(x);let ok=false;
 if(FEEDBACK_URL){try{await fetch(FEEDBACK_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(x)});ok=true}catch(e){}}
 app.innerHTML=`<div class=card><h3>Thank you! 💙</h3><p>${ok?"Your feedback was sent.":"Saved on this device. (Feedback collection is not connected yet.)"}</p><button class="btn pri" onclick="back()">Continue</button></div>`}
 function admin(){cur=null;bar();app.innerHTML=`<button class=link onclick=home()>‹ Back</button><h2>Feedback inbox</h2>${FEEDBACK_URL?`<input id=ap type=password placeholder="Admin passcode"><button class="btn pri" onclick="loadFb()">View all feedback</button>`:`<p class=mu>Backend not connected. Showing comments saved on this device only.</p>`}<div id=al></div>`;if(!FEEDBACK_URL)showFb(LS.get())}
