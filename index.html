@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EduQuest · CBSE Maths</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EduQuest · Maths</title>
 <style>
 :root{color-scheme:light dark;--bg:#f5f7fb;--c:#fff;--t:#1b2233;--m:#6b7488;--p:#5b5bd6;--g:#16a34a;--r:#e11d48;--l:#e3e7f1}
 @media(prefers-color-scheme:dark){:root{--bg:#0f1219;--c:#1a1f2c;--t:#eef1f8;--m:#9aa3b8;--p:#8b8bff;--l:#2b3246}}
@@ -27,7 +27,7 @@ textarea,input{width:100%;font:inherit;margin:8px 0;padding:10px;border-radius:1
 .bt{margin-top:18px;font-size:13px;color:var(--m)}
 </style></head><body><div id="bar"></div><main id="app"></main>
 <script>
-const FEEDBACK_URL="https://script.google.com/macros/s/AKfycbypm6urJRt_f3bY9UlK0s0n1U03TPr9ONGF4K5yCsWF9JF49E9Ttj0iAyf9pA80X_ou6Q/exec",SITE_URL="https://husssakba3.github.io/eduquest-poc/",FREE=100; // FREE = free questions per class before the simulated Rs 79 unlock (set 8 to demo the paywall)
+const FEEDBACK_URL="https://script.google.com/macros/s/AKfycbypm6urJRt_f3bY9UlK0s0n1U03TPr9ONGF4K5yCsWF9JF49E9Ttj0iAyf9pA80X_ou6Q/exec",SITE_URL="tps://husssakba3.github.io/eduquest-poc/",FREE=100; // FREE = free questions per class before the simulated Rs 79 unlock (set 8 to demo the paywall)
 const ls={g:k=>{try{return localStorage.getItem(k)}catch(e){return null}},s:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>'&#'+c.charCodeAt(0)+';');
 const rng=s=>{let a=s;return(lo,hi)=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return lo+Math.floor(((t^t>>>14)>>>0)/4294967296*(hi-lo+1))}};
@@ -73,9 +73,25 @@ pat:(r,n)=>{const a=r(1,n<2?5:20),d=r(n<2?1:2,n<2?3:9);return[`${a}, ${a+d}, ${a
 trig:(r,n,L,i)=>{const t=TR[i%10];return[`${t[0]} = ?`,t[1],`Standard value: ${t[0]} = ${t[1]}.`,`Recall the table of standard angles.`,['0','1/2','√3/2','1','1/√3'].filter(x=>x!=t[1])]},
 exp:r=>{const a=r(2,9),b=r(2,9),s=r(2,5);return r(0,1)?[`${s}^${a+b} ÷ ${s}^${b} = ${s}^?`,a,`Same base: subtract the powers, ${a+b} − ${b} = ${a}.`,`Subtract the powers.`]:[`${s}^${a} × ${s}^${b} = ${s}^?`,a+b,`Same base: add the powers, ${a} + ${b} = ${a+b}.`,`Add the powers.`]},
 ev:(r,n)=>{const x=r(2,9),a=r(n>=9?1:2,n>=9?5:9),b=r(1,15);return n>=9?[`Value of ${a}x² ${sg(b)} when x = ${x}?`,a*x*x+b,`${a}×${x}² + ${b} = ${a*x*x+b}.`,`Square x first.`]:[`If x = ${x}, the value of ${a}x ${sg(b)} is?`,a*x+b,`${a}×${x} + ${b} = ${a*x+b}.`,`Put ${x} in place of x.`]},
-dec:r=>{const a=r(1,99),b=r(1,99);return[`${(a/10).toFixed(1)} + ${(b/10).toFixed(1)} = ?`,((a+b)/10).toFixed(1),`Line up the decimal points: ${((a+b)/10).toFixed(1)}.`,`Add tenths like whole numbers.`,0.1]}
+dec:r=>{const a=r(1,99),b=r(1,99);return[`${(a/10).toFixed(1)} + ${(b/10).toFixed(1)} = ?`,((a+b)/10).toFixed(1),`Line up the decimal points: ${((a+b)/10).toFixed(1)}.`,`Add tenths like whole numbers.`,0.1]},
+ci:r=>{const P=100*r(1,20),q=[10,20][r(0,1)];return[`Amount (Rs) on Rs ${P} at ${q}% p.a. compound interest for 2 years?`,P*(100+q)**2/10000,`Year 1 amount = ${P*(100+q)/100}; year 2 = ${P*(100+q)**2/10000}.`,`Add ${q}% twice, each time on the new amount.`]},
+gst:r=>{const g=[5,12,18,28][r(0,3)],m=100*r(1,20);return[`A product costs Rs ${m} before tax. GST is ${g}%. Price with GST (Rs)?`,m+m*g/100,`GST = ${g}% of ${m} = ${m*g/100}. Price = ${m} + ${m*g/100}.`,`Find the tax first, then add it.`]},
+sh:r=>{const n=2*r(5,100),f=[10,50,100][r(0,2)],d=[10,20][r(0,1)];return[`Dividend (Rs) on ${n} shares of face value Rs ${f} at ${d}%?`,n*f*d/100,`Dividend = ${n} × ${f} × ${d}/100 = ${n*f*d/100}.`,`Dividend is a % of the total face value.`]},
+gp:r=>{const a=r(1,5),q=r(2,3),n=r(4,7);return[`GP: ${a}, ${a*q}, ${a*q*q}, … Find the ${n}th term.`,a*q**(n-1),`aₙ = a·r^(n−1) = ${a} × ${q}^${n-1} = ${a*q**(n-1)}.`,`The common ratio is ${q}.`]},
+log:r=>{if(r(0,1)){const b=[2,3,5][r(0,2)],k=r(2,6);return[`log base ${b} of ${b**k} = ?`,k,`${b}^${k} = ${b**k}, so the log is ${k}.`,`Which power of ${b} gives ${b**k}?`]}const p=[[4,25,2],[2,50,2],[5,20,2],[2,500,3],[8,125,3],[4,250,3]][r(0,5)];return[`log ${p[0]} + log ${p[1]} = ? (base 10)`,p[2],`log a + log b = log(ab): log ${p[0]*p[1]} = ${p[2]}.`,`Multiply the numbers inside the log.`]},
+mat:r=>{const a=r(1,9),b=r(1,9),c=r(1,9),d=r(1,9);return[`Determinant of the matrix [ ${a} ${b} ; ${c} ${d} ]?`,a*d-b*c,`ad − bc = ${a}×${d} − ${b}×${c} = ${a*d-b*c}.`,`Use ad − bc.`]},
+sim:r=>{const x=r(1,12),y=r(1,12);return[`x + y = ${x+y} and x − y = ${x-y}. Find x.`,x,`Add the equations: 2x = ${2*x}, so x = ${x}.`,`Add the two equations to remove y.`]},
+ineq:r=>{const a=r(2,9),c=r(5,60);return[`Smallest integer x with ${a}x > ${c}?`,Math.floor(c/a)+1,`x > ${c}/${a} = ${(c/a).toFixed(2)}, so the smallest integer is ${Math.floor(c/a)+1}.`,`Divide both sides by ${a}.`]},
+rd:r=>{const k=r(1,10),R=r(4,10),P=100*k;return[`Recurring deposit of Rs ${P}/month for 24 months at ${R}% p.a. Interest earned (Rs)?`,25*k*R,`I = P × n(n+1)/24 × R/100 = ${P} × 25 × ${R}/100 = ${25*k*R}.`,`Use I = P·n(n+1)/24 · R/100.`]},
+simi:r=>{const p=[[1,2],[2,3],[2,5],[3,4],[1,3]][r(0,4)],k=r(1,6);return[`Similar triangles have sides in the ratio ${p[0]}:${p[1]}. The smaller has area ${p[0]**2*k} cm². Area of the larger (cm²)?`,p[1]**2*k,`Areas are in the ratio ${p[0]**2}:${p[1]**2}, so the larger is ${p[1]**2}×${k}.`,`Areas are in the ratio of squares of sides.`]},
+fact:r=>{const a=(r(0,1)?1:-1)*r(1,9),b=(r(0,1)?1:-1)*r(1,9);return[`(x ${sg(a)})(x ${sg(b)}) = x² + ?x ${sg(a*b)}`,a+b,`The middle term is (${a}) + (${b}) = ${a+b}.`,`Add the two numbers.`]},
+cang:r=>{const a=r(20,80);return r(0,1)?[`Angle at the circumference is ${a}°. Angle at the centre on the same arc (°)?`,2*a,`The centre angle is double: 2 × ${a} = ${2*a}.`,`Centre angle = 2 × circumference angle.`]:[`Angle at the centre is ${2*a}°. Angle at the circumference on the same arc (°)?`,a,`Half of ${2*a} is ${a}.`,`Circumference angle = ½ × centre angle.`]},
+cyl:r=>{const k=r(1,3);if(r(0,1)){const h=r(2,10);return[`Take π = 22/7. Volume (cm³) of a cylinder, radius ${7*k} cm, height ${h} cm?`,154*k*k*h,`πr²h = 22/7 × ${7*k}² × ${h} = ${154*k*k*h}.`,`Use πr²h.`]}const h=3*r(1,6);return[`Take π = 22/7. Volume (cm³) of a cone, radius ${7*k} cm, height ${h} cm?`,154*k*k*h/3,`⅓πr²h = ⅓ × 22/7 × ${7*k}² × ${h} = ${154*k*k*h/3}.`,`Use ⅓πr²h.`]},
+spd:r=>{const s=r(20,90),t=r(2,8);return[`A car goes at ${s} km/h for ${t} hours. Distance (km)?`,s*t,`Distance = speed × time = ${s} × ${t} = ${s*t}.`,`Distance = speed × time.`]},
+conv:r=>{const k=r(2,15),u=[['km','m',1000],['m','cm',100],['kg','g',1000],['litres','ml',1000]][r(0,3)];return[`${k} ${u[0]} = ? ${u[1]}`,k*u[2],`1 ${u[0]} = ${u[2]} ${u[1]}, so ${k} × ${u[2]} = ${k*u[2]}.`,`Multiply by ${u[2]}.`]},
+set:r=>{const c=r(1,9),a=c+r(1,15),b=c+r(1,15);return[`n(A) = ${a}, n(B) = ${b}, n(A∩B) = ${c}. Find n(A∪B).`,a+b-c,`n(A∪B) = ${a} + ${b} − ${c} = ${a+b-c}.`,`Don't count the overlap twice.`]},
 };
-const CH={1:['Addition|add','Subtraction|sub','Patterns|pat','Money|money','Time|time','Halves & Quarters|fr','Place value|place','Doubling|mul','Sharing|div','Perimeter fun|per'],
+const CH0={1:['Addition|add','Subtraction|sub','Patterns|pat','Money|money','Time|time','Halves & Quarters|fr','Place value|place','Doubling|mul','Sharing|div','Perimeter fun|per'],
 2:['Addition|add','Subtraction|sub','Multiplication tables|mul','Division|div','Place value|place','Money|money','Time|time','Patterns|pat','Fractions|fr','Perimeter|per'],
 3:['Addition|add','Subtraction|sub','Multiplication|mul','Division|div','Fractions|fr','Place value|place','Money|money','Time|time','Perimeter|per','Area|area'],
 4:['Large numbers|place','Addition|add','Subtraction|sub','Multiplication|mul','Division|div','Fractions|fr','Decimals|dec','Perimeter & Area|area','Factors (HCF)|hcf','Patterns|pat'],
@@ -85,41 +101,54 @@ const CH={1:['Addition|add','Subtraction|sub','Patterns|pat','Money|money','Time
 8:['Squares & roots|sq','Cubes|cube','Linear equations|lin','Profit & loss|pro','Simple interest|si','Ratio|ratio','Mean & median|med','Exponents|exp','Probability|prob','Volume|vol'],
 9:['Number systems|sq','Polynomials|ev','Coordinate geometry|mid','Triangles|ang','Circles|circ','Linear equations|lin','Statistics|med','Probability|prob','Surface area & volume|cube','Pythagoras|pyth'],
 10:['Real numbers|hcf','Polynomials|ev','Quadratic equations|quad','Arithmetic progressions|ap','Trigonometry|trig','Coordinate geometry|dist','Circles|circ','Probability|prob','Statistics|mean','Pythagoras|pyth']};
+const CH={cbse:CH0,icse:{
+1:['Counting & numbers|place','Addition|add','Subtraction|sub','Patterns|pat','Money|money','Time|time','Measurement|conv','Halves & Quarters|fr','Doubling|mul','Sharing|div'],
+2:['Place value|place','Addition|add','Subtraction|sub','Multiplication|mul','Division|div','Money|money','Time|time','Measurement|conv','Fractions|fr','Patterns|pat'],
+3:['Numbers|place','Addition|add','Subtraction|sub','Multiplication|mul','Division|div','Fractions|fr','Measurement|conv','Time|time','Perimeter|per','Area|area'],
+4:['Large numbers|place','Multiplication|mul','Division|div','Factors & HCF|hcf','Multiples & LCM|lcm','Fractions|fr','Decimals|dec','Measurement|conv','Perimeter|per','Area|area'],
+5:['Place value|place','Factors|hcf','LCM|lcm','Fractions|fr','Decimals|dec','Percentage|pc','Speed & distance|spd','Average|mean','Area|area','Volume|vol'],
+6:['Integers|int','HCF|hcf','LCM|lcm','Fractions|fr','Decimals|dec','Ratio|ratio','Percentage|pc','Algebra|ev','Sets|set','Angles|ang'],
+7:['Integers|int','Fractions|fr','Percentage|pc','Profit & loss|pro','Simple interest|si','Linear equations|lin','Exponents|exp','Speed & time|spd','Triangles|ang','Mean|mean'],
+8:['Squares & roots|sq','Cubes|cube','Percentage|pc','Profit & loss|pro','Compound interest|ci','Linear equations|lin','Exponents|exp','Ratio|ratio','Mean & median|med','Volume|vol'],
+9:['Indices|exp','Logarithms|log','Expansions|fact','Simultaneous equations|sim','Compound interest|ci','Triangles|ang','Pythagoras|pyth','Statistics|med','Mensuration|cube','Coordinate geometry|mid'],
+10:['GST|gst','Banking (RD)|rd','Shares & dividends|sh','Linear inequations|ineq','Quadratic equations|quad','Matrices|mat','GP|gp','Similarity|simi','Circles|cang','Trigonometry|trig']}};
 function mk(r,ans,x){const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=r(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};let w,A;
 if(Array.isArray(x)){A=String(ans);w=sh(x.map(String)).slice(0,3)}else{const s=x||1,f=v=>s<1?v.toFixed(1):String(v);ans=+ans;A=f(ans);w=sh([1,-1,2,-2,3,-3,10,-10].map(d=>ans+d*s).filter(v=>ans<0||v>=0)).slice(0,3).map(f)}
 const o=sh([A,...w]);return[o,o.indexOf(A)]}
 const B={};
-function bank(g){if(B[g])return B[g];const o=[];CH[g].forEach((c,ci)=>{const[nm,t]=c.split('|'),seen=new Set();for(let i=0;i<10;i++){const L=i<3?1:i<7?2:3;let x,r,k=0;do{r=rng(g*9973+ci*131+i*17+k*7919+1);x=G[t](r,g,L,i);k++}while(seen.has(x[0])&&k<40);seen.add(x[0]);const[opts,a]=mk(r,x[1],x[4]);o.push({id:g+'-'+ci+'-'+i,g,ci,nm,L,q:x[0],o:opts,a,e:x[2],h:x[3]})}});return B[g]=o}
-const D=()=>({xp:0,tok:10,st:0,day:'',p:{},v:{},h:{},dd:{d:'',n:0},unl:{},rt:{},cor:0});
+function bank(g){const bk=S.bd+g;if(B[bk])return B[bk];const o=[];CH[S.bd][g].forEach((c,ci)=>{const[nm,t]=c.split('|'),seen=new Set();for(let i=0;i<10;i++){const L=i<3?1:i<7?2:3;let x,r,k=0;do{r=rng(g*9973+ci*131+i*17+k*7919+1+(S.bd=='icse'?777777:0));x=G[t](r,g,L,i);k++}while(seen.has(x[0])&&k<40);seen.add(x[0]);const[opts,a]=mk(r,x[1],x[4]);o.push({id:(S.bd=='icse'?'I':'')+g+'-'+ci+'-'+i,k:K(g),g,ci,nm,L,q:x[0],o:opts,a,e:x[2],h:x[3]})}});return B[bk]=o}
+const D=()=>({bd:'cbse',xp:0,tok:10,st:0,day:'',p:{},v:{},h:{},dd:{d:'',n:0},unl:{},rt:{},cor:0});
 let S=Object.assign(D(),JSON.parse(ls.g('eq2')||'{}')),C=JSON.parse(ls.g('eqc')||'{}'),T={r:0,h:0,c:0},cur=null,rate=0;
 const sv=()=>ls.s('eq2',JSON.stringify(S)),today=()=>new Date().toISOString().slice(0,10),done=l=>l.filter(q=>S.p[q.id]).length,app=$('#app'),LV=['','Beginner','Intermediate','Advanced'];
+const K=g=>(S.bd=='icse'?'i':'')+g,bn=()=>S.bd=='icse'?'ICSE':'CBSE',bsw=g=>`<div class=tabs>${['cbse','icse'].map(b=>`<button class="${S.bd==b?'on':''}" onclick="sb('${b}',${g||0})">${b.toUpperCase()}</button>`).join('')}</div>`;
+function sb(b,g){S.bd=b;sv();g?grade(g):home()}
 const btx=()=>`📖 DB reads ${T.r} · ⚡ cache hits ${T.h} · 🤖 Claude calls ${T.c}`;
 const bts=()=>`<details class=bt><summary>🔍 Behind the scenes</summary><p id=bt>${btx()}</p></details>`;
 function bar(){$('#bar').innerHTML=`<div class=hb><b onclick=home()>🎓 EduQuest</b><span>⭐ ${S.xp} · Lv ${Math.floor(S.xp/100)+1}</span><span>🔥 ${S.st}</span><span>🪙 ${S.tok}</span><button class=fbb onclick=fb() >💬 Feedback</button></div>`}
 function trk(L,i){const n=L.length,d=done(L),pc=Math.round(d/n*100),fl=[[25,'🌱'],[50,'🌿'],[75,'🌳'],[100,'🏆']];let s=Math.max(0,Math.min(i-5,n-12)),dots='';
 if(i>=0)for(let j=s;j<Math.min(n,s+12);j++){const p=S.p[L[j].id];dots+=`<b class="dt ${j==i?'cur':''} ${p?(p.ok?'ok':'bad'):S.v[L[j].id]&&j!=i?'sk':''}" onclick="jump(${j})">${j+1}</b>`}
 return`<div class=trk><div class=lane><div class=fill style="width:${pc}%"></div>${fl.map(([k,e])=>`<span class="fl ${pc>=k?'on':''}" style="left:${k}%">${e}</span>`).join('')}<span class=hero style="left:${pc}%">🪁</span></div><div class=cap>${d}/${n} done · ${pc}%${pc==100?' · 🎉 Complete!':''}</div>${dots?`<div class=dots>${dots}</div>`:''}</div>`}
-function home(){cur=null;bar();location.hash='';app.innerHTML=`<h2>Pick your class</h2><div class=grid>${[1,2,3,4,5,6,7,8,9,10].map(g=>{const d=done(bank(g));return`<button class=gb onclick="grade(${g})"><b>${g}</b><small>${d}/100</small><i style="width:${d}%"></i></button>`}).join('')}</div><div class=row><a class=btn target=_blank href="https://wa.me/?text=${encodeURIComponent('Try EduQuest – free CBSE maths practice for kids: '+(SITE_URL||location.href.split('#')[0]))}">📲 Share on WhatsApp</a><button onclick=fb()>✍️ Send feedback</button><button onclick=nw()>🆕 New student</button></div>${bts()}`}
-function grade(g,m='c',f=-1){cur=null;lg=g;bar();const b=bank(g),ch=CH[g].map(c=>c.split('|')[0]);
-let h=`<button class=link onclick=home()>‹ All classes</button><h2>Class ${g} · CBSE Maths</h2>${trk(b,-1)}<div class=tabs>${[['c','🌱 Chapters'],['a','📚 All questions'],['s','⚡ Smart mix']].map(([k,t])=>`<button class="${m==k?'on':''}" onclick="grade(${g},'${k}')">${t}</button>`).join('')}</div>`;
+function home(){cur=null;bar();location.hash='';app.innerHTML=`${bsw(0)}<h2>Pick your class · ${bn()}</h2><div class=grid>${[1,2,3,4,5,6,7,8,9,10].map(g=>{const d=done(bank(g));return`<button class=gb onclick="grade(${g})"><b>${g}</b><small>${d}/100</small><i style="width:${d}%"></i></button>`}).join('')}</div><div class=row><a class=btn target=_blank href="https://wa.me/?text=${encodeURIComponent('Try EduQuest – free CBSE & ICSE maths practice for kids: '+(SITE_URL||location.href.split('#')[0]))}">📲 Share on WhatsApp</a><button onclick=fb()>✍️ Send feedback</button><button onclick=nw()>🆕 New student</button></div>${bts()}`}
+function grade(g,m='c',f=-1){cur=null;lg=g;bar();const b=bank(g),ch=CH[S.bd][g].map(c=>c.split('|')[0]);
+let h=`<button class=link onclick=home()>‹ All classes</button><h2>Class ${g} · ${bn()} Maths</h2>${bsw(g)}${trk(b,-1)}<div class=tabs>${[['c','🌱 Chapters'],['a','📚 All questions'],['s','⚡ Smart mix']].map(([k,t])=>`<button class="${m==k?'on':''}" onclick="grade(${g},'${k}')">${t}</button>`).join('')}</div>`;
 if(m=='c')h+=`<div class=grid2>${ch.map((n,i)=>{const dn=done(b.filter(q=>q.ci==i));return`<button class=cc onclick="play(${g},'c',${i})"><span class=pl>${dn==10?'🌳':dn>4?'🌿':dn?'🌱':'🫘'}</span><b>${n}</b><small>${dn}/10 done</small></button>`}).join('')}</div>`;
 if(m=='a'){h+=`<div class=chips><button class="${f<0?'on':''}" onclick="grade(${g},'a',-1)">All</button>${ch.map((n,i)=>`<button class="${f==i?'on':''}" onclick="grade(${g},'a',${i})">${n}</button>`).join('')}</div>`;
 h+=b.filter(q=>f<0||q.ci==f).map((q,i)=>{const p=S.p[q.id];return`<div class=row2 onclick="play(${g},'a',${f},${i})">${p?(p.ok?'✅':'❌'):S.v[q.id]?'⏭️':'⚪'}<span>${i+1}. ${q.q}</span><em>${q.nm}</em></div>`}).join('')}
-if(m=='s')h+=`<div class=card><h3>⚡ Smart mix</h3><p>Questions from every chapter, matched to your level (now: <b>${LV[Math.round(S.rt[g]||1)]}</b>). Unanswered ones come first.</p><button class="btn pri" onclick="play(${g},'s',-1)">Start</button></div>`;
+if(m=='s')h+=`<div class=card><h3>⚡ Smart mix</h3><p>Questions from every chapter, matched to your level (now: <b>${LV[Math.round(S.rt[K(g)]||1)]}</b>). Unanswered ones come first.</p><button class="btn pri" onclick="play(${g},'s',-1)">Start</button></div>`;
 app.innerHTML=h+bts()}
 function play(g,m,f,i=0){const b=bank(g);let L,t;
 if(m=='c'){L=b.filter(q=>q.ci==f);t=L[0].nm;const n=L.findIndex(q=>!S.p[q.id]);if(i==0&&n>0)i=n}
 else if(m=='a'){L=b.filter(q=>f<0||q.ci==f);t=f<0?'All questions':L[0].nm}
-else{const rt=S.rt[g]||1;L=b.map(q=>[q,Math.random()]).sort((x,y)=>x[1]-y[1]).map(x=>x[0]).sort((x,y)=>(!!S.p[x.id]-!!S.p[y.id])||Math.abs(x.L-rt)-Math.abs(y.L-rt));t='Smart mix'}
+else{const rt=S.rt[K(g)]||1;L=b.map(q=>[q,Math.random()]).sort((x,y)=>x[1]-y[1]).map(x=>x[0]).sort((x,y)=>(!!S.p[x.id]-!!S.p[y.id])||Math.abs(x.L-rt)-Math.abs(y.L-rt));t='Smart mix'}
 cur={g,m,f,L,i,t};show(1)}
 const fxh=q=>{const p=S.p[q.id];let h='';if(S.h[q.id])h+=`<div class=hint>💡 ${q.h}</div>`;if(p)h+=`<div class="ex ${p.ok?'g':'r'}">${p.ok?`✅ Correct! +${p.x} XP`:`❌ Not quite. Answer: <b>${q.o[q.a]}</b>`}<br>${q.e}<br><button onclick=deep()>🧠 Deep Explain</button><div id=dp></div></div>`;return h};
 function show(rd){const{g,L,i}=cur,q=L[i];lg=g;if(rd){T.r++;S.v[q.id]=1}sv();bar();
-if(g!=1&&!S.unl[g]&&!S.p[q.id]&&done(bank(g))>=FREE){app.innerHTML=`<button class=link onclick="grade(${g})">‹ Back</button><div class=card><h3>🔒 Free trial finished</h3><p>Unlock Class ${g} maths for Rs 79 (simulated · product <code>eduquest_in_g${g}_math_unlock</code>).</p><button class="btn pri" onclick="S.unl[${g}]=1;show(0)">Unlock (demo)</button></div>`;return}
+if(g!=1&&!S.unl[K(g)]&&!S.p[q.id]&&done(bank(g))>=FREE){app.innerHTML=`<button class=link onclick="grade(${g})">‹ Back</button><div class=card><h3>🔒 Free trial finished</h3><p>Unlock Class ${g} maths for Rs 79 (simulated · product <code>eduquest_in_${S.bd=='icse'?'icse_':''}g${g}_math_unlock</code>).</p><button class="btn pri" onclick="S.unl['${K(g)}']=1;show(0)">Unlock (demo)</button></div>`;return}
 const p=S.p[q.id];
-app.innerHTML=`<button class=link onclick="grade(${g},'${cur.m}',${cur.f})">‹ Class ${g} · ${cur.t}</button>${trk(L,i)}<div class=card><div class=tag>${q.nm} · ${LV[q.L]}</div><h3>${q.q}</h3>${q.o.map((o,j)=>`<button class="op ${p?(j==q.a?'ok':j==p.c?'bad':''):''}" ${p?'disabled':''} onclick="ans(${j})">${o}</button>`).join('')}<div>${fxh(q)}</div>${p||S.h[q.id]?'':`<button onclick=hint()>💡 Hint (1 token)</button>`}</div><div class=nav><button ${i?'':'disabled'} onclick="mv(-1)">◀ Back</button><span>${i+1} / ${L.length}</span><button class=pri onclick="mv(1)">${p?'Next ▶':'Skip ▶'}</button></div>${bts()}`}
+app.innerHTML=`<button class=link onclick="grade(${g},'${cur.m}',${cur.f})">‹ ${bn()} Class ${g} · ${cur.t}</button>${trk(L,i)}<div class=card><div class=tag>${q.nm} · ${LV[q.L]}</div><h3>${q.q}</h3>${q.o.map((o,j)=>`<button class="op ${p?(j==q.a?'ok':j==p.c?'bad':''):''}" ${p?'disabled':''} onclick="ans(${j})">${o}</button>`).join('')}<div>${fxh(q)}</div>${p||S.h[q.id]?'':`<button onclick=hint()>💡 Hint (1 token)</button>`}</div><div class=nav><button ${i?'':'disabled'} onclick="mv(-1)">◀ Back</button><span>${i+1} / ${L.length}</span><button class=pri onclick="mv(1)">${p?'Next ▶':'Skip ▶'}</button></div>${bts()}`}
 function ans(j){const q=cur.L[cur.i];if(S.p[q.id])return;const ok=j==q.a,x=ok?(10*q.L)>>(S.h[q.id]?1:0):0,t=today();
 if(S.day!=t){S.st=S.day==new Date(Date.now()-864e5).toISOString().slice(0,10)?S.st+1:1;S.day=t}
-S.p[q.id]={c:j,ok,x};S.xp+=x;if(ok&&++S.cor%5==0)S.tok++;S.rt[q.g]=Math.min(3,Math.max(1,(S.rt[q.g]||1)+(ok?.25:-.25)));show(0)}
+S.p[q.id]={c:j,ok,x};S.xp+=x;if(ok&&++S.cor%5==0)S.tok++;S.rt[q.k]=Math.min(3,Math.max(1,(S.rt[q.k]||1)+(ok?.25:-.25)));show(0)}
 function hint(){const q=cur.L[cur.i];if(S.tok<1)return alert('No hint tokens left. You earn 1 for every 5 correct answers!');S.tok--;S.h[q.id]=1;show(0)}
 function mv(d){const n=cur.i+d;if(n<0)return;if(n>=cur.L.length)return finish();cur.i=n;show(1)}
 function jump(j){cur.i=j;show(1)}
@@ -134,7 +163,7 @@ let lg='';const back=()=>cur?show(0):home();
 function fb(){rate=0;app.innerHTML=`<h2>Your feedback</h2><p class=mu>Tell us what you liked or what to fix. Please don't enter personal details.</p><div class=em>${["😞","😐","🙂","😍"].map((e,i)=>`<button id=r${i+1} onclick="rt(${i+1})" aria-label="Rating ${i+1} of 4">${e}</button>`).join("")}</div><textarea id=ft maxlength=1000 placeholder="Your comment…"></textarea><input id=fn maxlength=60 placeholder="Name (optional)"><div class=row><button class="btn pri" onclick="sendFb()">Send</button><button onclick="back()">Cancel</button></div><div id=fs></div>`}
 function rt(n){rate=n;for(let i=1;i<5;i++)$("#r"+i).classList.toggle("on",i==n)}
 async function sendFb(){const msg=$("#ft").value.trim();if(!msg&&!rate){$("#fs").innerHTML=`<div class=fb>Add a rating or a comment first.</div>`;return}
-const ts=new Date().toISOString(),x={ts,t:ts,name:$("#fn").value.trim(),rating:rate,msg,comment:msg,grade:String(lg||"")};LS.add(x);let ok=false;
+const ts=new Date().toISOString(),x={ts,t:ts,name:$("#fn").value.trim(),rating:rate,msg,comment:msg,grade:lg?bn()+" "+lg:""};LS.add(x);let ok=false;
 if(FEEDBACK_URL){try{await fetch(FEEDBACK_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(x)});ok=true}catch(e){}}
 app.innerHTML=`<div class=card><h3>Thank you! 💙</h3><p>${ok?"Your feedback was sent.":"Saved on this device. (Feedback collection is not connected yet.)"}</p><button class="btn pri" onclick="back()">Continue</button></div>`}
 function admin(){cur=null;bar();app.innerHTML=`<button class=link onclick=home()>‹ Back</button><h2>Feedback inbox</h2>${FEEDBACK_URL?`<input id=ap type=password placeholder="Admin passcode"><button class="btn pri" onclick="loadFb()">View all feedback</button>`:`<p class=mu>Backend not connected. Showing comments saved on this device only.</p>`}<div id=al></div>`;if(!FEEDBACK_URL)showFb(LS.get())}
